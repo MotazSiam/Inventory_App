@@ -1,0 +1,27 @@
+.header-form{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+@media (max-width: 600px) {
+    .header-form img{
+    height: 80px !important;
+    }
+}
+.header-form img{
+    height: 100px;
+    border-radius: 10px;
+    box-shadow:0 0 11px 0px black
+}
+.header-form h2{
+    flex: auto;
+}
+form{
+    padding-top: 10px !important;
+    padding: 10%;
+}
+a{
+    cursor: pointer;
+    color: rgb(42, 42, 206)!important;;
+}

@@ -1,0 +1,62 @@
+<div style="margin-top: 20px;">
+    <a (click)="routeTo('/Customer')"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+      class="bi bi-arrow-left-circle-fill" viewBox="0 0 16 16">
+      <path
+        d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm3.5 7.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z" />
+    </svg>Back to list</a>
+    </div>
+    <hr>
+    <div class="header-form">
+    
+    <h2> Create New Cutomer</h2>
+    
+    
+    <!-- <img *ngIf="!base64Image"   src="../../../assets/default/1.jpg"> -->
+    
+    <img [src]="src">
+    </div>
+    
+    <form #customer="ngForm" (ngSubmit)="editCustomer(customer)">
+    
+      <div class="form-group">
+        <label for="name">Name</label><br>
+        <input #name="ngModel" type="text" class="form-control" id="name" required minlength="2" maxlength="60" name="name"
+          ngModel>
+        <p *ngIf="name.touched && name.invalid" style="color: red;">please insert valid name</p>
+        <p *ngIf="name.errors?.['required'] && name.touched" style="color: red;">Name is require</p>
+      </div>
+    
+      <pre></pre>
+    
+      <div class="form-group">
+        <label for="description">Address</label><br>
+        <input type="text" class="form-control" id="address" name="address" ngModel>
+    
+      </div>
+      <pre></pre>
+
+
+      <div class="form-group">
+        <label for="description">City</label><br>
+        <input type="text" class="form-control" id="city" name="city" ngModel>
+    
+      </div>
+      <pre></pre>
+      <div class="form-group">
+        <label for="description">Phone</label><br>
+        <input type="text" class="form-control" id="phone" name="phone" ngModel>
+    
+      </div>
+      <pre></pre>
+
+      <div class="form-group">
+        <label>Select Image </label><br>
+        <input class="form-control" type="file" accept="image/*" (change)="handleUpload($event)" name="img" ngModel>
+    
+      </div>
+    
+      <pre></pre>
+    
+      <p></p>
+      <button type="submit" class="btn btn-primary">New Brand</button>
+    </form>

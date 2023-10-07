@@ -1,0 +1,151 @@
+
+<div style="margin-top: 20px;">
+    <a (click)="routeTo('Bill')"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+      class="bi bi-arrow-left-circle-fill" viewBox="0 0 16 16">
+      <path
+        d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm3.5 7.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z" />
+    </svg>Back to list</a>
+    </div>
+
+<h2>Create New Invoice</h2>
+
+<form #newBill="ngForm"  (ngSubmit)="addBill(newBill)">
+<div class="container-fluid">
+    <div class="row" >
+
+        <div class="form-group">
+            <label for="code">Book NO.</label><br>
+            <input #bookNo="ngModel" type="text" class="form-control" id="bookNo"  minlength="2" maxlength="20" name="bookNo"
+              ngModel>
+          
+          </div>
+
+          <div class="form-group">
+            <label for="code">Description</label><br>
+            <input #description="ngModel" type="text" class="form-control" id="description"  minlength="2" maxlength="20" name="description"
+              ngModel>
+          
+          </div>
+          <div class="form-group">
+            <label for="code">Customer</label><br>
+          <div class="ng-autocomplete" style="width: auto !important;">
+
+
+            <ng-autocomplete  class="form-control"
+              [data]="customers"
+              [searchKeyword]="keyword"
+              placeholder="Select Customer"
+              (selected)='selectCustomer($event)'
+              (inputChanged)='onChangeSearchCustomer($event)'
+              (inputFocused)='onFocused($event)'
+              [itemTemplate]="customerTemplate"
+              (inputCleared)="cancelSelectedCustomer()"
+              [notFoundTemplate]="notFoundTemplate">
+            </ng-autocomplete>
+    
+            <ng-template #customerTemplate let-item>
+                <div class="cus">
+                    <img [src]="item.img">
+            <a [innerHTML]="item.name"></a>
+            
+        </div>
+            </ng-template>
+    
+            <ng-template #notFoundTemplate let-notFound>
+            <div [innerHTML]="notFound"></div>
+            </ng-template>
+            </div>
+          </div>
+    
+
+          <div class="form-group">
+            <label for="operationDate">Date </label><br>
+            <input #operationDate="ngModel" type="date" class="form-control" id="billDate" required name="billDate"
+              ngModel>
+            <p *ngIf="operationDate.errors?.['required'] && operationDate.touched" style="color: red;">Date is require</p>
+          </div>
+
+    </div>
+<br>
+    <div class="form-group" style="    background-color: #a5e3fa3b; border-radius: 10px; padding: 10px;">
+        <h5 for="startStock">Select Product</h5><br>
+    <div class="ng-autocomplete" style="width: auto !important;">
+
+
+        <ng-autocomplete  class="form-control"
+          [data]="data"
+          [searchKeyword]="keyword"
+          placeholder="Select Product"
+          (selected)='selectProductEvent($event)'
+          (inputChanged)='onChangeSearch($event)'
+          (inputFocused)='onFocused($event)'
+          [itemTemplate]="itemTemplate"
+          (inputCleared)="closeSelectedProduct()"
+          [notFoundTemplate]="notFoundTemplate">
+        </ng-autocomplete>
+
+        <ng-template #itemTemplate let-item>
+        <a [innerHTML]="item.name"></a>
+        </ng-template>
+
+        <ng-template #notFoundTemplate let-notFound>
+        <div [innerHTML]="notFound"></div>
+        </ng-template>
+        </div>
+
+
+    <br>
+    <div class="row" *ngIf=" newBillProduct.productId > 1" >
+        <dt class="col-sm-1">Price :</dt>
+        <dd class="col-sm-2"> <input type="number" value="0"  min="1" max="100000000"   class="form-control" id="price" name="price" (change)='addPrice($event)'></dd>
+
+        <dt class="col-sm-1">Count :</dt>
+        <dd class="col-sm-2"><input type="number" value="1" #count="ngModel"  min="1" max="1000" ngModel class="form-control" (change)="addCount($event)"></dd>
+
+        <dt class="col-sm-2"><button style="background-color: green;" class="btn btn-primary" (click)="addProduct()">Add Product</button></dt>
+    </div>
+
+</div>
+<hr>
+    <table class='table table-striped' aria-labelledby="tableLabel" *ngIf="billProducts.length">
+        <thead>
+          <tr>
+
+           <th>Product Name</th>
+           <th>Product Name AR</th>
+           <th>Count</th>
+           <th>Price</th>
+           <th>Total Amount</th>
+           <th></th>
+
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let billProduct of billProducts">
+
+            <td>{{billProduct.product.name}}</td>
+            <td>{{billProduct.product.nameAR}}</td>
+            <td>{{billProduct.count}}</td>
+            <td>{{billProduct.price}}</td>
+            <td>{{(billProduct.price  * billProduct.count)  }}</td>
+            <td><button style="color: red;" (click)="deleteProduct(billProduct.productId)">delete</button></td>
+
+
+          </tr>
+          <tr>
+            <td>Total</td>
+            <td></td>
+            <td>{{billProducts.length}}</td>
+            <td></td>
+            <td>{{totalAmount}}</td>
+            <td></td>
+
+          </tr>
+        </tbody>
+      </table>
+</div>
+<button type="submit" class="btn btn-primary" *ngIf="billProducts.length">New Bill</button>
+</form>
+
+
+

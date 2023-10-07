@@ -1,0 +1,105 @@
+<div style="margin-top: 20px;">
+
+    <a (click)="routeTo('Bill')"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+            class="bi bi-arrow-left-circle-fill" viewBox="0 0 16 16">
+            <path
+                d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm3.5 7.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z" />
+        </svg>Back to list</a>
+</div>
+<h2>Invoice details</h2>
+<br>
+<div class="Batch-Header-details">
+    <div class="container-fluid">
+        <div class="row">
+
+            <dt class="col-sm-2">Book NO.:</dt>
+            <dd class="col-sm-4"> {{bill.bookNo}}</dd>
+
+            <dt class="col-sm-2"> Description :</dt>
+            <dd class="col-sm-4">{{bill.description}}</dd>
+
+            <dt class="col-sm-2"> Product Count :</dt>
+            <dd class="col-sm-4">{{bill.productCount}}</dd>
+
+            <dt class="col-sm-2">Total Amount:</dt>
+            <dd class="col-sm-4"> {{bill.totalAmount}}</dd>
+
+            <dt class="col-sm-2">Status:</dt>
+            <dd class="col-sm-4" *ngIf="bill.status == 'Pending'" style="background-color: yellow; width: fit-content; border-radius: 10px;"> {{bill.status}}</dd>
+            <dd class="col-sm-4" *ngIf="bill.status == 'Pay'" style="background-color: blue; width: fit-content; border-radius: 10px;"> {{bill.status}}</dd>
+            <dd class="col-sm-4" *ngIf="bill.status == 'Confirmed'" style="background-color: green; width: fit-content; border-radius: 10px;"> {{bill.status}}</dd>
+            <dd class="col-sm-4" *ngIf="bill.status == 'Closed'"  style="background-color: gray; width: fit-content; border-radius: 10px;">  {{bill.status}}</dd>
+        </div>
+    </div>
+</div>
+<hr>
+
+<div class="form-group" style="    background-color:#0000003b; border-radius: 10px; padding: 10px; width: fit-content;">
+    <h5 for="startStock">Invoice Customer Details</h5>
+    <div class="cus">
+<img  [src]="bill.customer.img">
+<br>
+<div class="row" style="padding: 10px;">
+    <dt class="col-sm-2">Name:</dt>
+    <dd class="col-sm-4"> {{bill.customer.name}}</dd>
+
+    <dt class="col-sm-2">Address:</dt>
+    <dd class="col-sm-4"> {{bill.customer.address}}</dd>
+
+    <dt class="col-sm-2">City:</dt>
+    <dd class="col-sm-4"> {{bill.customer.city}}</dd>
+    <dt class="col-sm-2">Phone:</dt>
+    <dd class="col-sm-4"> {{bill.customer.phone}}</dd>
+</div>
+</div>
+
+</div>
+<hr>
+<!-- <dt class="col-sm-2"> Customer :</dt>
+            <dd class="col-sm-4">
+                <div class="cus">
+                    <img [src]="bill.customer.img">
+                    <label>{{bill.customer.name}} </label>
+                </div>
+            </dd> -->
+
+
+<div style=" overflow: auto;">
+   <h5>Invoice Product List:</h5>
+    <table class='table table-striped table-hover table-bordered' aria-labelledby="tableLabel" *ngIf="bill.billProducts">
+      <thead>
+        <tr>
+        
+         <th>Product Name</th>
+         <th>Product NameAr</th>
+         <th>Count</th>
+         <th>Price</th>
+         <th>Total Amount</th>
+         <th></th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of bill.billProducts">
+        
+          <td>{{product.productName}}</td>
+          <td>{{product.productNameAR}}</td>
+          <td>{{product.count}}</td>
+          <td>{{product.price}}</td>
+          <td>{{(product.price  * product.count)  }}</td>
+        
+          <td><a href="/Products" >more detials</a></td>
+        </tr>
+        <tr>
+          <td>Total</td>
+          <td></td>
+          <td>{{bill.productCount}}</td>
+          <td></td>
+          <td>{{bill.totalAmount}}</td>
+          <td></td>
+       
+        </tr>
+      </tbody>
+    </table>
+    </div>
+   

@@ -1,0 +1,38 @@
+svg{
+    margin: 3px;
+}
+
+.product-list{
+    position: fixed;
+    top: 116px;
+    height: 80%;
+    width: 80%;
+    background-color: #adb5bd;
+    border-radius: 20px;
+
+}
+
+@media only screen and (max-width: 600px) {
+    .product-list {
+    overflow: auto;
+    width: 95%;
+    }
+  }
+
+.product-list button{
+    margin-left: 10px;
+    background: #373b3e00;
+    color: #af2a2a;
+    border: aliceblue;
+}
+dt , dd{
+    font-size: medium;
+    margin-top: 20px;
+    opacity: 100%;
+    font-weight: 700;
+}
+h2{
+
+    padding: 1%;
+    text-decoration-line: underline;
+}
