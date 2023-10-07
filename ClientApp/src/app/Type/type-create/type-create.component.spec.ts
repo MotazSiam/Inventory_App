@@ -1,0 +1,23 @@
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+
+import { TypeCreateComponent } from './type-create.component';
+
+describe('TypeCreateComponent', () => {
+  let component: TypeCreateComponent;
+  let fixture: ComponentFixture<TypeCreateComponent>;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      declarations: [ TypeCreateComponent ]
+    })
+    .compileComponents();
+
+    fixture = TestBed.createComponent(TypeCreateComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});

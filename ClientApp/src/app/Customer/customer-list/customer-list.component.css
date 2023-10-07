@@ -1,0 +1,19 @@
+img{
+    height: 120px;
+    width: 100%;
+    object-fit: cover;
+}
+a svg{
+    display: inline-block;
+    height: 1rem;
+    cursor: pointer;
+    margin: 3px;
+}
+a{
+    cursor: pointer;
+    color: rgb(42, 42, 206)!important;;
+}
+
+.cards_area{
+    display: table-cell;
+}

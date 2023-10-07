@@ -1,0 +1,197 @@
+
+<div style="margin-top: 20px;">
+    <a (click)="routeTo('Batch')"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+      class="bi bi-arrow-left-circle-fill" viewBox="0 0 16 16">
+      <path
+        d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm3.5 7.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z" />
+    </svg>Back to list</a>
+    </div>
+
+<h2>Create New Batch</h2>
+
+<form #newBatch="ngForm"  (ngSubmit)="NewBatch(newBatch)">
+<div class="container-fluid">
+    <div class="row" >
+
+        <div class="form-group">
+            <label for="code">Code</label><br>
+            <input #code="ngModel" type="text" class="form-control" id="code" required minlength="2" maxlength="20" name="code"
+              ngModel>
+            <p *ngIf="code.touched && code.invalid" style="color: red;">please insert valid name</p>
+            <p *ngIf="code.errors?.['required'] && code.touched" style="color: red;">Name is require</p>
+          </div>
+
+
+
+          <div class="form-group">
+            <label for="supplierName">Supplier Name </label><br>
+            <input #supplierName="ngModel" type="text" class="form-control" id="supplierName" required minlength="2" maxlength="20" name="supplierName"
+              ngModel>
+            <p *ngIf="supplierName.touched && supplierName.invalid" style="color: red;">please insert valid name</p>
+            <p *ngIf="supplierName.errors?.['required'] && supplierName.touched" style="color: red;">Name is require</p>
+          </div>
+
+          <div class="form-group">
+            <label for="inventoryName">Inventory Name </label><br>
+            <input #inventoryName="ngModel" type="text" class="form-control" id="inventoryName" required minlength="2" maxlength="20" name="inventoryName"
+              ngModel>
+            <p *ngIf="inventoryName.touched && inventoryName.invalid" style="color: red;">please insert valid name</p>
+            <p *ngIf="inventoryName.errors?.['required'] && inventoryName.touched" style="color: red;">Name is require</p>
+          </div>
+
+          <div class="form-group">
+            <label for="operationDate">Date </label><br>
+            <input #operationDate="ngModel" type="date" class="form-control" id="operationDate" required name="operationDate"
+              ngModel>
+            <p *ngIf="operationDate.errors?.['required'] && operationDate.touched" style="color: red;">Date is require</p>
+          </div>
+
+          <div class="form-group">
+            <h5 for="startStock">Operation type</h5><br>
+
+
+
+            <svg class="filter" version="1.1">
+              <defs>
+                <filter id="gooeyness">
+                  <feGaussianBlur in="SourceGraphic" stdDeviation="8" result="blur" />
+                  <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 20 -10" result="gooey" />
+                  <feComposite in="SourceGraphic" in2="gooey" operator="atop" />
+                </filter>
+              </defs>
+            </svg>
+            <div class="radios-boxes">
+              <div class="radios">
+                <input type="radio" name="type" id="type1" class="radio" value="0"  ngModel #type="ngModel"[value]="0">
+                <input type="radio" name="type" id="type2" class="radio" value="1" ngModel #type="ngModel" [value]="1">
+
+                <div class="ball"></div>
+              </div>
+              <div class="labels">
+                <label for="type1" class="label" id="inc">Increase</label>
+                <label for="type2" class="label" id="dec">Decrease</label>
+
+              </div>
+            </div>
+            <p *ngIf="type.touched && type.invalid" style="color: red;" >please select brand</p>
+            <p *ngIf="type.errors?.['required'] && type.touched" style="color: red;">brand is require</p> 
+          <!-- <div class="btn-group">
+            <input
+              mdbRadio
+              type="radio"
+              class="btn-check"
+              name="type"
+              id="type1"
+              autocomplete="off"
+              [checked]="true"
+            />
+            <label class="btn btn-secondary" for="type1" style="color: rgb(0, 255, 0);">Increase</label>
+            <input
+              mdbRadio
+              type="radio"
+              class="btn-check"
+              name="type"
+              id="type2"
+              autocomplete="off"
+            />
+            <label class="btn btn-secondary" for="type2" style="color: #ff5656;">Decrease</label>
+
+
+          </div> -->
+        </div>
+          <div class="form-group">
+
+            <!-- <label for="startStock">Operation type</label><br>
+            <select #type="ngModel"  ngModel id="type" name="type" class="form-control" required >
+
+                <option value="0" >Increase</option>
+                <option value="1" >Decrease</option>
+            </select>
+            <p *ngIf="type.touched && type.invalid" style="color: red;">please select brand</p>
+            <p *ngIf="type.errors?.['required'] && type.touched" style="color: red;">brand is require</p> -->
+        </div>
+
+    </div>
+<br>
+    <div class="form-group" style="    background-color: #a5e3fa3b; border-radius: 10px; padding: 10px;">
+        <h5 for="startStock">Select Product</h5><br>
+    <div class="ng-autocomplete" style="width: auto !important;">
+
+
+        <ng-autocomplete  class="form-control"
+          [data]="data"
+          [searchKeyword]="keyword"
+          placeholder="Select Product"
+          (selected)='selectProductEvent($event)'
+          (inputChanged)='onChangeSearch($event)'
+          (inputFocused)='onFocused($event)'
+          [itemTemplate]="itemTemplate"
+          (inputCleared)="closeSelectedProduct()"
+          [notFoundTemplate]="notFoundTemplate">
+        </ng-autocomplete>
+
+        <ng-template #itemTemplate let-item>
+        <a [innerHTML]="item.name"></a>
+        </ng-template>
+
+        <ng-template #notFoundTemplate let-notFound>
+        <div [innerHTML]="notFound"></div>
+        </ng-template>
+        </div>
+
+
+    <br>
+    <div class="row" *ngIf="SelectedProductId && newBatchProduct.productId > 1" >
+        <dt class="col-sm-1">Price :</dt>
+        <dd class="col-sm-2"> <input type="number" value="0"  min="1" max="100000000"   class="form-control" id="price" name="price" (change)='addPrice($event)'></dd>
+
+        <dt class="col-sm-1">Count :</dt>
+        <dd class="col-sm-2"><input type="number" value="1" #count="ngModel"  min="1" max="1000" ngModel class="form-control" (change)="addCount($event)"></dd>
+
+        <dt class="col-sm-2"><button style="background-color: green;" class="btn btn-primary" (click)="addProduct()">Add Product</button></dt>
+    </div>
+
+</div>
+<hr>
+    <table class='table table-striped' aria-labelledby="tableLabel" *ngIf="batchProducts.length">
+        <thead>
+          <tr>
+
+           <th>Product Name</th>
+           <th>Product Name AR</th>
+           <th>Count</th>
+           <th>Price</th>
+           <th>Total Amount</th>
+           <th></th>
+
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let batchProduct of batchProducts">
+
+            <td>{{batchProduct.product.name}}</td>
+            <td>{{batchProduct.product.nameAR}}</td>
+            <td>{{batchProduct.count}}</td>
+            <td>{{batchProduct.price}}</td>
+            <td>{{(batchProduct.price  * batchProduct.count)  }}</td>
+            <td><button style="color: red;" (click)="deleteProduct(batchProduct.productId)">delete</button></td>
+
+
+          </tr>
+          <tr>
+            <td>Total</td>
+            <td></td>
+            <td>{{batchProducts.length}}</td>
+            <td></td>
+            <td>{{totalAmount}}</td>
+            <td></td>
+
+          </tr>
+        </tbody>
+      </table>
+</div>
+<button type="submit" class="btn btn-primary" *ngIf="batchProducts.length">New Batch</button>
+</form>
+
+
+

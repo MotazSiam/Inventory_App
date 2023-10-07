@@ -1,0 +1,22 @@
+.cus{
+    display: flex;
+    /* justify-content: center;
+    flex-direction: row;
+    padding: 2px;
+    margin: auto;
+    padding-top: 10px; */
+}
+.cus img {
+    width: 2.5cm;
+    height: 2.5cm;
+    /* margin-top: auto; */
+    /* margin-bottom: auto; */
+    border-radius: 30px;
+    object-fit: cover;
+
+    
+}
+.cus label{
+    margin: auto;
+    margin-left: 10px;
+}

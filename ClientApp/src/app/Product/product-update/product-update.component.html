@@ -1,0 +1,139 @@
+
+<div style="margin-top: 20px;">
+
+    <a (click)="routeTo('Product')"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+            class="bi bi-arrow-left-circle-fill" viewBox="0 0 16 16">
+            <path
+                d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm3.5 7.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z" />
+        </svg>Back to list</a>
+</div>
+<hr>
+<div class="header-form">
+
+    <h2>Edit Product</h2>
+</div>
+
+<form #newProduct="ngForm" (ngSubmit)="EditProduct(newProduct)">
+
+
+  
+
+    <div class="form-group">
+        <label for="name">Name</label><br>
+        <input #name="ngModel" type="text" class="form-control" id="name" required minlength="2" maxlength="20"
+            name="name" ngModel>
+        <p *ngIf="name.touched && name.invalid" style="color: red;">please insert valid name</p>
+        <p *ngIf="name.errors?.['required'] && name.touched" style="color: red;">Name is require</p>
+    </div>
+
+    <pre></pre>
+
+    <div class="form-group">
+        <label for="description">Description</label><br>
+        <input type="text" class="form-control" id="description" name="description" ngModel>
+    </div>
+
+    <pre></pre>
+
+    <div class="form-group">
+        <label for="nameAR">Name AR</label><br>
+        <input type="text" class="form-control" id="nameAR" name="nameAR" ngModel>
+    </div>
+
+    <pre></pre>
+
+    <div class="form-group">
+        <label for="model">Model</label><br>
+        <input type="text" class="form-control" id="model" name="model" ngModel>
+    </div>
+
+    <pre></pre>
+
+    <div class="form-group">
+        <label for="size">Size</label><br>
+        <input type="text" class="form-control" id="size" name="size" ngModel>
+    </div>
+
+    <pre></pre>
+    <div class="form-group">
+        <label for="code">Code</label><br>
+        <input type="text" class="form-control" id="code" name="code" ngModel>
+    </div>
+
+    <pre></pre>
+
+    <div class="form-group">
+        <label for="electricity">Electricity</label><br>
+        <input type="text" class="form-control" id="electricity" name="electricity" ngModel>
+    </div>
+
+    <pre></pre>
+
+    <div class="form-group">
+        <label for="engine">Engine</label><br>
+        <input type="text" class="form-control" id="engine" name="engine" ngModel>
+    </div>
+
+    <pre></pre>
+
+    <div class="form-group">
+        <label for="startStock">Start Stock</label><br>
+        <input type="number" class="form-control" id="startStock" name="startStock" ngModel>
+    </div>
+
+    <pre></pre>
+
+    <div class="form-group">
+        <label for="brand">Select brand </label><br>
+        <select #brand="ngModel"  ngModel  id="brand" name="brand" class="form-control" required    [(ngModel)]="product.brandId">
+            <option value="" disabled>Choose a Brand</option>
+            <option *ngFor="let brand of brands" [ngValue]="brand.id" >{{brand.name}}</option>
+        </select>
+
+        <p *ngIf="brand.touched && brand.invalid" style="color: red;">please select brand</p>
+        <p *ngIf="brand.errors?.['required'] && brand.touched" style="color: red;" >brand is require</p>
+    </div>
+    <pre></pre>
+    <div class="form-group">
+        <label for="category">Select Categroy</label><br>
+        <select #category="ngModel"  ngModel id="category" name="category" class="form-control" required (change)="selectCategory(category.value)" [(ngModel)]=" product.categoryId">
+            <option value="" disabled>Choose a Category</option>
+            <option *ngFor="let cat of cats" [ngValue]="cat.id" >{{cat.name}}</option>
+        </select>
+
+        <p *ngIf="category.touched && category.invalid" style="color: red;">please select category</p>
+        <p *ngIf="category.errors?.['required'] && category.touched" style="color: red;">category is require</p>
+    </div>
+    <pre></pre>
+    <div class="form-group">
+        <label for="type">Select Type</label><br>
+        <select #type="ngModel"  ngModel id="type" name="type" class="form-control" required [(ngModel)]="product.typeId" >
+            <option value="" disabled>Choose a Type</option>
+            <option *ngFor="let type of  TypesByCat" [ngValue]="type.id" >{{type.name}}</option>
+        </select>
+
+        <p *ngIf="type.touched && type.invalid" style="color: red;">please select type</p>
+        <p *ngIf="type.errors?.['required'] && type.touched" style="color: red;">type is require</p>
+    </div>
+    <!-- <div class="form-group">
+        <select formControlName="brand">
+            <label for="brand">Select brand</label><br>
+            <option [ngValue]="null" disabled>Select Brand</option>
+            <option *ngFor="let brand of brands" [ngValue]="brand.id">{{brand.name}}</option>
+        </select>
+    </div> -->
+    <!-- <div class="dropdown">
+        <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Dropdown
+        </button>
+        <ul class="dropdown-menu">
+          <li><button class="dropdown-item" type="button">Dropdown item</button></li>
+          <li><button class="dropdown-item" type="button">Dropdown item</button></li>
+          <li><button class="dropdown-item" type="button">Dropdown item</button></li>
+        </ul>
+      </div> -->
+<p></p>
+      <div class="form-group">
+    <button type="submit"  class="btn btn-primary">Edit</button>
+      </div>
+</form>
