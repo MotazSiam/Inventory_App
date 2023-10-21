@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "1frlnxVTXN03bHzGQvXueeodjeGH1C7Gp8nOggeCtooOLeihFHSO/lr9366ZIIlGM6odg/awpUPEzKkyDjVCcQ==",
+  "dgSpecHash": "BOUcjsRNJ3L7Jz2XGZhZq3fgg4BTLdNxQbFLtoNkwA+U2hf3Hm0nzGakEqjzP/0PKJqneuaPmLK2GtA6qxp4VA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\user\\source\\repos\\Inventory_App\\Inventory_App.csproj",
+  "projectFilePath": "C:\\Users\\user\\source\\repos\\SalahAPP\\BanArab_App.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\user\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\7.0.8\\microsoft.aspnetcore.authentication.jwtbearer.7.0.8.nupkg.sha512",

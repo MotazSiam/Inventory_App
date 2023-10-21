@@ -1,37 +1,11 @@
 {
   "Version": 1,
-  "Hash": "exOhvFLr3L7w6mBn6RC0hTWzyboDDeHamTEQzoGBbdw=",
+  "Hash": "Ru/TBhHToKmmdYolpqXZ5q09EtTPa+BpDrM01G7jMuw=",
   "Source": "Inventory_App",
   "BasePath": "_content/Inventory_App",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
-  "DiscoveryPatterns": [
-    {
-      "Name": "Inventory_App\\wwwroot",
-      "Source": "Inventory_App",
-      "ContentRoot": "C:\\Users\\user\\source\\repos\\Inventory_App\\wwwroot\\",
-      "BasePath": "_content/Inventory_App",
-      "Pattern": "**"
-    }
-  ],
-  "Assets": [
-    {
-      "Identity": "C:\\Users\\user\\source\\repos\\Inventory_App\\wwwroot\\favicon.ico",
-      "SourceId": "Inventory_App",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\user\\source\\repos\\Inventory_App\\wwwroot\\",
-      "BasePath": "_content/Inventory_App",
-      "RelativePath": "favicon.ico",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\favicon.ico"
-    }
-  ]
+  "DiscoveryPatterns": [],
+  "Assets": []
 }
