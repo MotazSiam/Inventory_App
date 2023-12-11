@@ -56,9 +56,10 @@ this.url="https://localhost:7064/";
 
 
   selectProductEvent(item:any){
+    alert(JSON.stringify(item));
     this.SelectedProductId = item.id;
     this.newBatchProduct.productId = item.id;
-
+    alert( this.SelectedProductId );
   }
   closeSelectedProduct(){
     this.newBatchProduct = new BatchProduct;
@@ -75,10 +76,7 @@ this.url="https://localhost:7064/";
   }
 
 
-  addPrice(event: any){
-    this.newBatchProduct.price = event.target.value;
-   
-  }
+
 
   addCount(event: any){
     this.newBatchProduct.count = event.target.value;
@@ -90,7 +88,6 @@ this.url="https://localhost:7064/";
     this.newBatchProduct.product = this.list.find((i: { id: number; }) => i.id === this.newBatchProduct.productId);
    this.batchProducts.push(this.newBatchProduct);
 
-   this.CaluclateTotal();
 
    this.data.forEach((value: { id: number; },index: any)=>{
     if(value.id==this.newBatchProduct.productId) this.data.splice(index,1);
@@ -101,12 +98,12 @@ this.newBatchProduct = new BatchProduct ;
 }
 
 
-CaluclateTotal(){
-  this.totalAmount = 0;
-  this.batchProducts.forEach((batchProduct:BatchProduct) =>{
-    this.totalAmount = this.totalAmount + (batchProduct.count* batchProduct.price);
-   });
-}
+// CaluclateTotal(){
+//   this.totalAmount = 0;
+//   this.batchProducts.forEach((batchProduct:BatchProduct) =>{
+//     this.totalAmount = this.totalAmount + (batchProduct.count* batchProduct.price);
+//    });
+// }
 
 
   deleteProduct(id:number){
@@ -125,7 +122,7 @@ CaluclateTotal(){
       if(value.productId==id) this.batchProducts.splice(index,1);
   });
 
-  this.CaluclateTotal();
+ 
 
   // var findList = this.list.find((x: { id: number; name:string;}) => x.id === id);
   // alert("find List length = "+ findList.length);
@@ -139,15 +136,15 @@ CaluclateTotal(){
   NewBatch(newBatch: any){
     console.log(newBatch);
     if (newBatch.valid) {
-      this.CaluclateTotal();
       var batch = new Batch;
-      batch.code = newBatch.controls.code.value;
+      batch.bookNo = newBatch.controls.bookNo.value;
       batch.supplierName = newBatch.controls.supplierName.value;
+      batch.invoiceNo = newBatch.controls.invoiceNo.value;
       batch.inventoryName = newBatch.controls.inventoryName.value;
       batch.btachType = newBatch.controls.type.value;
       batch.operationDate = newBatch.controls.operationDate.value;
       batch.productCount = this.batchProducts.length;
-      batch.totalAmount = this.totalAmount;
+    
       batch.BatchProducts = this.batchProducts;
 
 
@@ -187,7 +184,6 @@ CaluclateTotal(){
 class BatchProduct{
   batchId!:number;
   productId!:number;
-  price: number = 0;
   count: number = 1;
   btachType!:number;
   operationDate!:any;
@@ -196,13 +192,14 @@ class BatchProduct{
 }
 
 class Batch{
-  code!:string;
+  bookNo!:string;
+  invoiceNo!:string;
   supplierName!:string;
   inventoryName!:string;
   btachType!:number;
   operationDate!:any;
   productCount!:number;
-  totalAmount!:number;
+ 
 
   BatchProducts: BatchProduct[] = [];
 }

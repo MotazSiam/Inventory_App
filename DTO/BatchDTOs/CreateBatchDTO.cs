@@ -4,13 +4,14 @@ namespace Inventory_App.DTO.BatchDTOs
 {
     public class CreateBatchDTO
     {
-        public string code { get; set; }
+        public string bookNo { get; set; }
         public string supplierName { get; set; }
+        public string invoiceNo { get; set; }
         public int productCount { get; set; }
         public OpertionType btachType { get; set; }
         public string? inventoryName { get; set; }
 
-        public decimal totalAmount { get; set; }
+        public decimal totalAmount { get; set; } = 0;
         public DateTime operationDate { get; set; }
         public string? note { get; set; }
 
@@ -20,7 +21,8 @@ namespace Inventory_App.DTO.BatchDTOs
         {
             return new Batch
             {
-                Code = code,
+                BookNo = bookNo,
+                InvoiceNo = invoiceNo,
                 SupplierName = supplierName,
                 ProductCount = productCount,
                 BtachType = btachType,

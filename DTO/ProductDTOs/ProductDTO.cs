@@ -16,6 +16,11 @@ namespace Inventory_App.DTO.ProductDTOs
         public string Engine { get; set; }
         public int StartStock { get; set; }
 
+        public string img { get; set; } 
+        public string unit { get; set; } 
+
+        public int? spareForProductId { get; set; }
+
         public int stockCount { get; set; }
         public int categoryId { get; set; }
         public int typeId { get; set; }
@@ -42,7 +47,9 @@ namespace Inventory_App.DTO.ProductDTOs
                 brandId = entity.brandId,
                 categoryId = entity.CategoryId,
                 typeId = entity.TypeId,
-
+                unit = entity.Unit,
+                img = entity.Img,
+                spareForProductId = entity.SpareForProductId == null ? null : entity.SpareForProductId.Value
             };
         }
     }

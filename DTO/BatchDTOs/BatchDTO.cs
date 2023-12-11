@@ -5,7 +5,8 @@ namespace Inventory_App.DTO.BatchDTOs
     public class BatchDTO
     {
         public int id { get; set; }
-        public string code { get; set; }
+        public string bookNo { get; set; }
+        public string invoiceNo { get; set; }
         public string supplierName { get; set; }
         public int productCount { get; set; }
         public OpertionType btachType { get; set; }
@@ -21,7 +22,8 @@ namespace Inventory_App.DTO.BatchDTOs
             return entity == null ? null : new BatchDTO
             {
                 id = entity.Id,
-                code = entity.Code,
+                bookNo = entity.BookNo,
+                invoiceNo = entity.InvoiceNo,
                 supplierName = entity.SupplierName,
                 productCount = entity.ProductCount,
                 btachType = entity.BtachType,

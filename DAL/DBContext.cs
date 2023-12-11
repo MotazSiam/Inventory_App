@@ -25,9 +25,7 @@ namespace Inventory_App.DAL
         public DbSet<Product> Products { get; set; }
         public DbSet<Batch> Batches { get; set; }
         public DbSet<BatchProduct> BatchProducts { get; set; }
-        public DbSet<Customer> Customers { get; set; }
-        public DbSet<Bill> Bills { get; set; }
-        public DbSet<BillProduct> BillProducts { get; set; }
+
 
     }
 }

@@ -23,20 +23,20 @@ namespace Inventory_App.Services
 
         public IEnumerable<Product> GetByBrandId(int brandId)
         {
-           var result = Repo.GetAll(product => product.IsDeleted == false && product.brandId== brandId).Value.Include(p => p.Brand).Include(p => p.Category).Include(p => p.Type);
+           var result = Repo.GetAll(product => product.IsDeleted == false && product.brandId== brandId && product.IsSpare == false).Value.Include(p => p.Brand).Include(p => p.Category).Include(p => p.Type);
             return result;
         }
         public IEnumerable<Product> GetByCategoryId(int categoryId)
         {
-            var result = Repo.GetAll(product => product.IsDeleted == false && product.CategoryId == categoryId).Value.Include(p => p.Brand).Include(p => p.Category).Include(p => p.Type);
+            var result = Repo.GetAll(product => product.IsDeleted == false && product.CategoryId == categoryId && product.IsSpare == false).Value.Include(p => p.Brand).Include(p => p.Category).Include(p => p.Type);
             return result;
         }
         public IEnumerable<Product> GetByTypeId(int typeId)
         {
-            var result = Repo.GetAll(product => product.IsDeleted == false && product.TypeId == typeId).Value.Include(p => p.Brand).Include(p => p.Category).Include(p => p.Type);
+            var result = Repo.GetAll(product => product.IsDeleted == false && product.TypeId == typeId && product.IsSpare == false).Value.Include(p => p.Brand).Include(p => p.Category).Include(p => p.Type);
             return result;
         }
-        public IEnumerable<Product> GetAll() => Repo.GetAll(product => product.IsDeleted == false).Value.Include(p=>p.Brand).Include(p=>p.Category).Include(p=>p.Type);
+        public IEnumerable<Product> GetAll() => Repo.GetAll(product => product.IsDeleted == false && product.IsSpare == false).Value.Include(p=>p.Brand).Include(p=>p.Category).Include(p=>p.Type);
 
         private Product Add(Product entity)
         {
@@ -87,7 +87,7 @@ namespace Inventory_App.Services
         public List<ProductDTO> GetProducts(int pageSize , int pageNumber)
         {
             var result = new List<ProductDTO>();
-            var products = Repo.GetAll().Value;
+            var products = Repo.GetAll(product =>  product.IsSpare == false).Value;
       
             var pageProducts = products.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToList();
             foreach (var product in pageProducts.ToList())
@@ -121,12 +121,12 @@ namespace Inventory_App.Services
             var operations = ArrangeProductOperation(productId);
             foreach (var op in operations)
             {
-                if (op.opertionType == OpertionType.Increase)
+                if (op.opertionType == OpertionType.Delivery)
                 {
                     sum = sum + op.count;
                 }
 
-                if (op.opertionType == OpertionType.Decrease)
+                if (op.opertionType == OpertionType.Dispose)
                 {
                     sum = sum - op.count;
                 }
@@ -142,12 +142,12 @@ namespace Inventory_App.Services
             int sum = startStock;
             foreach(var batchProduct in batchProducts)
             {
-                if(batchProduct.btachType == OpertionType.Increase)
+                if(batchProduct.btachType == OpertionType.Delivery)
                 {
                     sum = sum + batchProduct.count;
                 }
 
-                if(batchProduct.btachType == OpertionType.Decrease)
+                if(batchProduct.btachType == OpertionType.Dispose)
                 {
                     sum = sum - batchProduct.count;
                 }
@@ -158,6 +158,11 @@ namespace Inventory_App.Services
 
 
 
+        public List<ProductDTO> GetSparePartsByProductId(int productId)
+        {
+            var result =  Repo.GetAll(product=> product.SpareForProductId == productId).Value.Select(sp => new ProductDTO().GetDTO(sp)).ToList();
+            return result;
+        }
 
         public List<ProductByYearDTO> GetProductByYear( int productId)
         {
@@ -169,8 +174,8 @@ namespace Inventory_App.Services
                 var dto = new ProductByYearDTO
                 {
                     year = year.ToString(),
-                    increaseCount = batchProducts.Where(bp => bp.BtachType == OpertionType.Increase).Sum(bp => bp.Count),
-                    decreaseCount = batchProducts.Where(bp => bp.BtachType == OpertionType.Decrease).Sum(bp => bp.Count)
+                    increaseCount = batchProducts.Where(bp => bp.BtachType == OpertionType.Delivery).Sum(bp => bp.Count),
+                    decreaseCount = batchProducts.Where(bp => bp.BtachType == OpertionType.Dispose).Sum(bp => bp.Count)
                 };
                 year++;
                 result.Add(dto);

@@ -16,6 +16,12 @@ namespace Inventory_App.DTO.ProductDTOs
         public int startStock { get; set; }
         public int brandId { get; set; }
         public int categoryId { get; set; }
+
+              public string img { get; set; } = "";
+        public string unit { get; set; } = "piece";
+
+        public bool isSpare { get; set; } = false;
+        public int? spareForProductId { get; set; }
         public int typeId { get; set; }
         public DateTime createDate { get; set; }
 
@@ -26,7 +32,6 @@ namespace Inventory_App.DTO.ProductDTOs
             {
                 Id = id,
                 Name = name,
-
                 NameAR = nameAR,
                 Description = description,
                 Model = model,
@@ -36,11 +41,14 @@ namespace Inventory_App.DTO.ProductDTOs
                 Engine = engine,
                 brandId = brandId,
                 StartStock = startStock,
-
+                Img = img,
+                Unit = unit,
                 TypeId = typeId,
                 CategoryId = categoryId,
                 IsDeleted = false,
                 CreatedDate = createDate,
+                IsSpare = isSpare,
+                SpareForProductId = spareForProductId == null ? null : spareForProductId.Value,
                 
 
             };

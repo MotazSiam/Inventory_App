@@ -7,7 +7,7 @@ namespace Inventory_App.DTO.BatchDTOs
         public int ProductId { get; set; }
         public int? BatchId { get; set; }
         public int Count { get; set; }
-        public decimal Price { get; set; }
+        public decimal Price { get; set; } = 0;
         public OpertionType BtachType { get; set; }
         public DateTime OperationDate { get; set; }
 

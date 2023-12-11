@@ -80,5 +80,12 @@ namespace Inventory_App.Controllers
             return result;
         }
 
+        [HttpGet("GetSpareParts")]
+        public List<ProductDTO> GetSpareParts(int productId)
+        {
+            var result = _productService.GetSparePartsByProductId(productId);
+            return result;
+        }
+
     }
 }

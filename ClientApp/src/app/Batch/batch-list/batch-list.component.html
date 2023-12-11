@@ -9,7 +9,7 @@
      </div>
   <hr>
 <div class="form-group">
-    <label for="name">Serach By code</label>
+    <label for="name">Serach By Book NO.</label>
     <input type="text" class="form-control" id="search"
            (change)="changeSearch($event)"
          >
@@ -24,16 +24,17 @@
   <thead>
     <tr>
       <th>No.</th>
-      <th> <a (click)="SortByName()">Code  
+      <th> <a (click)="SortByName()">Book NO.  
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down-up" viewBox="0 0 16 16">
           <path fill-rule="evenodd" d="M11.5 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L11 2.707V14.5a.5.5 0 0 0 .5.5zm-7-14a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L4 13.293V1.5a.5.5 0 0 1 .5-.5z"/>
         </svg>
        </a></th>
+       <th>Invoice NO.</th>
       <th>Supplier Name</th>
       <th>Product Count</th>
       <th>Btach Type</th>
       <th>Inventory Name</th>
-      <th>Total Amount</th>
+     
       <th>Operation Date</th>
       <th></th>
       
@@ -42,7 +43,8 @@
   <tbody>
     <tr *ngFor="let batch of batches">
       <td>{{ batch.id }}</td>
-      <td>{{ batch.code }}</td>
+      <td>{{ batch.bookNo }}</td>
+      <td>{{ batch.invoiceNo }}</td>
       <td>{{ batch.supplierName }}</td>
       <td>{{batch.productCount}} </td>
       <td *ngIf="batch.btachType == 0">Increase <svg style="color: #2aa32a;" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-file-plus-fill" viewBox="0 0 16 16">
@@ -53,7 +55,7 @@
         <path d="M4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H4zm0 1h8a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1z"/>
       </svg></td>
       <td>{{batch.inventoryName}} </td>
-      <td> {{batch.totalAmount}} </td>
+
       <td> {{batch.operationDate | date :'mediumDate'}}</td>
       <td><a  title="Product List" (click)="ShowBatchDetails(batch.id)"><svg style="    color: brown;" xmlns="http://www.w3.org/2000/svg" width="30" height="auto" fill="currentColor" class="bi bi-card-list" viewBox="0 0 16 16">
         <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
@@ -83,8 +85,11 @@
   <div class="container-fluid">
     <div class="row" >
    
-            <dt class="col-sm-2">Batch Code :</dt>
-            <dd class="col-sm-4"> {{batchDetial.code}}</dd>
+            <dt class="col-sm-2">Batch Book NO. :</dt>
+            <dd class="col-sm-4"> {{batchDetial.bookNo}}</dd>
+
+            <dt class="col-sm-2">Batch Invoice NO. :</dt>
+            <dd class="col-sm-4"> {{batchDetial.invoiceNo}}</dd>
          
             <dt class="col-sm-2">Supplier Name :</dt>
             <dd class="col-sm-4">{{batchDetial.supplierName}}</dd>
@@ -116,8 +121,7 @@
      <th>Product Name</th>
      <th>Product NameAr</th>
      <th>Count</th>
-     <th>Price</th>
-     <th>Total Amount</th>
+    
      <th></th>
       
     </tr>
@@ -128,8 +132,7 @@
       <td>{{product.productName}}</td>
       <td>{{product.productNameAR}}</td>
       <td>{{product.count}}</td>
-      <td>{{product.price}}</td>
-      <td>{{(product.price  * product.count)  }}</td>
+     
     
       <td><a href="/Products" >more detials</a></td>
     </tr>
@@ -137,8 +140,6 @@
       <td>Total</td>
       <td></td>
       <td>{{btachProductTotalCount}}</td>
-      <td></td>
-      <td>{{batchProductsTotalAmount}}</td>
       <td></td>
    
     </tr>

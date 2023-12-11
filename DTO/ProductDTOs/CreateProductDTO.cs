@@ -6,12 +6,16 @@ namespace Inventory_App.DTO.ProductDTOs
     {
         public string name { get; set; }
         public string nameAR { get; set; }
-        public string description { get; set; }
-        public string model { get; set; }
-        public string size { get; set; }
-        public string code { get; set; }
-        public string electricity { get; set; }
-        public string engine { get; set; }
+        public string description { get; set; } = "";
+        public string model { get; set; } = "";
+        public string size { get; set; } = "";
+        public string code { get; set; } = "";
+        public string electricity { get; set; } = "";
+        public string engine { get; set; } = "";
+        public string img { get; set; } = "";
+        public string unit { get; set; } = "piece";
+        public bool isSpare { get; set; } = false;
+        public int? spareForProductId { get; set; }
         public int startStock { get; set; }
         public int brandId { get; set; }
         public int typeId { get; set; }
@@ -22,7 +26,6 @@ namespace Inventory_App.DTO.ProductDTOs
             return new Product
             {
                 Name = name,
-
                 NameAR = nameAR,
                 Description = description,
                 Model = model,
@@ -32,12 +35,14 @@ namespace Inventory_App.DTO.ProductDTOs
                 Engine = engine,
                 brandId = brandId,
                 StartStock = startStock,
-
+                SpareForProductId = spareForProductId,
+                IsSpare = isSpare,
+                Img = img,
+                Unit = unit,
                 TypeId = typeId,
                 CategoryId = categoryId,
                 IsDeleted = false,
                 CreatedDate = DateTime.Now,
-
             };
         }
 

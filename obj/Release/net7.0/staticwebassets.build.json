@@ -1,27 +1,27 @@
 {
   "Version": 1,
-  "Hash": "exOhvFLr3L7w6mBn6RC0hTWzyboDDeHamTEQzoGBbdw=",
-  "Source": "Inventory_App",
-  "BasePath": "_content/Inventory_App",
+  "Hash": "iKFoY2rShRB8ZfS6IHNwO9kgz3X1cpKu7MPtj9zo80M=",
+  "Source": "BanArab_App",
+  "BasePath": "_content/BanArab_App",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
   "DiscoveryPatterns": [
     {
-      "Name": "Inventory_App\\wwwroot",
-      "Source": "Inventory_App",
-      "ContentRoot": "C:\\Users\\user\\source\\repos\\Inventory_App\\wwwroot\\",
-      "BasePath": "_content/Inventory_App",
+      "Name": "BanArab_App\\wwwroot",
+      "Source": "BanArab_App",
+      "ContentRoot": "C:\\Users\\user\\source\\repos\\SalahAPP\\wwwroot\\",
+      "BasePath": "_content/BanArab_App",
       "Pattern": "**"
     }
   ],
   "Assets": [
     {
-      "Identity": "C:\\Users\\user\\source\\repos\\Inventory_App\\wwwroot\\favicon.ico",
-      "SourceId": "Inventory_App",
+      "Identity": "C:\\Users\\user\\source\\repos\\SalahAPP\\wwwroot\\favicon.ico",
+      "SourceId": "BanArab_App",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\user\\source\\repos\\Inventory_App\\wwwroot\\",
-      "BasePath": "_content/Inventory_App",
+      "ContentRoot": "C:\\Users\\user\\source\\repos\\SalahAPP\\wwwroot\\",
+      "BasePath": "_content/BanArab_App",
       "RelativePath": "favicon.ico",
       "AssetKind": "All",
       "AssetMode": "All",

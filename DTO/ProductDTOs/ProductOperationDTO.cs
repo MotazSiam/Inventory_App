@@ -31,7 +31,7 @@ namespace Inventory_App.DTO.ProductDTOs
             {
                 date = entity.BillDate,
                 isSales = true,
-                opertionType = OpertionType.Decrease,
+                opertionType = OpertionType.Dispose,
                 count = entity.Count,
                 price = entity.Price,
                 billId = entity.BillId

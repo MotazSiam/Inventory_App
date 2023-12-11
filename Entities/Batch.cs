@@ -3,7 +3,8 @@
     public class Batch
     {
         public int Id { get; set; }
-        public string Code { get; set; }
+        public string BookNo { get; set; }
+        public string InvoiceNo { get; set; }
         public string SupplierName { get; set; }
         public int ProductCount { get; set; }
         public OpertionType BtachType { get; set; }
@@ -21,7 +22,7 @@
 
     public enum OpertionType
     {
-        Increase,
-        Decrease
+        Delivery,
+        Dispose
     }
 }

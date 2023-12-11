@@ -9,6 +9,8 @@ import { IgxLegendModule, IgxCategoryChartModule } from 'igniteui-angular-charts
 
 
 
+
+
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
@@ -80,6 +82,7 @@ import {BillUpdateComponent} from './Bill/bill-update/bill-update.component';
     AutocompleteLibModule,
     IgxLegendModule,
     IgxCategoryChartModule,
+
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'counter', component: CounterComponent },

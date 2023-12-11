@@ -2,7 +2,7 @@
 "SpaProxyServer": {
 "ServerUrl": "https://localhost:44441",
 "LaunchCommand": "npm start",
-"WorkingDirectory": "C:\\Users\\user\\source\\repos\\Inventory_App\\ClientApp\\",
+"WorkingDirectory": "C:\\Users\\user\\source\\repos\\SalahAPP\\ClientApp\\",
 "MaxTimeoutInSeconds": "120"
 }
 }

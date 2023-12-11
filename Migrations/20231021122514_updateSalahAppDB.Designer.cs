@@ -3,6 +3,7 @@ using System;
 using Inventory_App.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Inventory_App.Migrations
 {
     [DbContext(typeof(DBContext))]
-    partial class DBContextModelSnapshot : ModelSnapshot
+    [Migration("20231021122514_updateSalahAppDB")]
+    partial class updateSalahAppDB
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -175,30 +178,29 @@ namespace Inventory_App.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Code")
+                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime(6)");
 
                     b.Property<string>("Description")
+                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("Electricity")
+                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("Engine")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("Img")
+                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("tinyint(1)");
 
-                    b.Property<bool>("IsSpare")
-                        .HasColumnType("tinyint(1)");
-
                     b.Property<string>("Model")
+                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("Name")
@@ -210,10 +212,8 @@ namespace Inventory_App.Migrations
                         .HasColumnType("longtext");
 
                     b.Property<string>("Size")
+                        .IsRequired()
                         .HasColumnType("longtext");
-
-                    b.Property<int?>("SpareForProductId")
-                        .HasColumnType("int");
 
                     b.Property<int>("StartStock")
                         .HasColumnType("int");
@@ -221,17 +221,12 @@ namespace Inventory_App.Migrations
                     b.Property<int>("TypeId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Unit")
-                        .HasColumnType("longtext");
-
                     b.Property<int>("brandId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
-
-                    b.HasIndex("SpareForProductId");
 
                     b.HasIndex("TypeId");
 
@@ -494,10 +489,6 @@ namespace Inventory_App.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Inventory_App.Entities.Product", "SpareForProduct")
-                        .WithMany()
-                        .HasForeignKey("SpareForProductId");
-
                     b.HasOne("Inventory_App.Entities.Type", "Type")
                         .WithMany()
                         .HasForeignKey("TypeId")
@@ -513,8 +504,6 @@ namespace Inventory_App.Migrations
                     b.Navigation("Brand");
 
                     b.Navigation("Category");
-
-                    b.Navigation("SpareForProduct");
 
                     b.Navigation("Type");
                 });

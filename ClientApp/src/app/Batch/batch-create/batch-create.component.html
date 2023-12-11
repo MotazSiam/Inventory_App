@@ -14,17 +14,24 @@
     <div class="row" >
 
         <div class="form-group">
-            <label for="code">Code</label><br>
-            <input #code="ngModel" type="text" class="form-control" id="code" required minlength="2" maxlength="20" name="code"
+            <label for="code">Book No.</label><br>
+            <input #bookNo="ngModel" type="text" class="form-control" id="bookNo" required  name="bookNo"
               ngModel>
-            <p *ngIf="code.touched && code.invalid" style="color: red;">please insert valid name</p>
-            <p *ngIf="code.errors?.['required'] && code.touched" style="color: red;">Name is require</p>
+            <p *ngIf="bookNo.touched && bookNo.invalid" style="color: red;">please insert valid book number</p>
+            <p *ngIf="bookNo.errors?.['required'] && bookNo.touched" style="color: red;">book number is require</p>
           </div>
+          <pre></pre>
+          <div class="form-group">
+          <label for="code">Invoice No.</label><br>
+          <input #invoiceNo="ngModel" type="text" class="form-control" id="invoiceNo"  name="invoiceNo" 
+            ngModel>
 
+        </div>
 
+        <pre></pre>
 
           <div class="form-group">
-            <label for="supplierName">Supplier Name </label><br>
+            <label for="supplierName">Supplier/Customer Name </label><br>
             <input #supplierName="ngModel" type="text" class="form-control" id="supplierName" required minlength="2" maxlength="20" name="supplierName"
               ngModel>
             <p *ngIf="supplierName.touched && supplierName.invalid" style="color: red;">please insert valid name</p>
@@ -68,8 +75,8 @@
                 <div class="ball"></div>
               </div>
               <div class="labels">
-                <label for="type1" class="label" id="inc">Increase</label>
-                <label for="type2" class="label" id="dec">Decrease</label>
+                <label for="type1" class="label" id="inc">Delivery note</label>
+                <label for="type2" class="label" id="dec">Dispose note</label>
 
               </div>
             </div>
@@ -141,10 +148,7 @@
 
 
     <br>
-    <div class="row" *ngIf="SelectedProductId && newBatchProduct.productId > 1" >
-        <dt class="col-sm-1">Price :</dt>
-        <dd class="col-sm-2"> <input type="number" value="0"  min="1" max="100000000"   class="form-control" id="price" name="price" (change)='addPrice($event)'></dd>
-
+    <div class="row" *ngIf="SelectedProductId && newBatchProduct.productId > 0" >
         <dt class="col-sm-1">Count :</dt>
         <dd class="col-sm-2"><input type="number" value="1" #count="ngModel"  min="1" max="1000" ngModel class="form-control" (change)="addCount($event)"></dd>
 
@@ -160,8 +164,7 @@
            <th>Product Name</th>
            <th>Product Name AR</th>
            <th>Count</th>
-           <th>Price</th>
-           <th>Total Amount</th>
+
            <th></th>
 
           </tr>
@@ -172,8 +175,7 @@
             <td>{{batchProduct.product.name}}</td>
             <td>{{batchProduct.product.nameAR}}</td>
             <td>{{batchProduct.count}}</td>
-            <td>{{batchProduct.price}}</td>
-            <td>{{(batchProduct.price  * batchProduct.count)  }}</td>
+         
             <td><button style="color: red;" (click)="deleteProduct(batchProduct.productId)">delete</button></td>
 
 
@@ -183,7 +185,7 @@
             <td></td>
             <td>{{batchProducts.length}}</td>
             <td></td>
-            <td>{{totalAmount}}</td>
+          
             <td></td>
 
           </tr>

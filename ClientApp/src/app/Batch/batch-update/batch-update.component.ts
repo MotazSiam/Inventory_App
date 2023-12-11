@@ -49,8 +49,9 @@ this.url="https://localhost:7064/";
 
     //  alert(JSON.stringify(this.batchProducts));
       this.addProducts();
-      this.CaluclateTotal(); 
-      (<HTMLInputElement>document.getElementById("code")).value = result.code;
+
+      (<HTMLInputElement>document.getElementById("bookNo")).value = result.bookNo;
+      (<HTMLInputElement>document.getElementById("invoiceNo")).value = result.invoiceNo;
       (<HTMLInputElement>document.getElementById("supplierName")).value =result.supplierName;
       (<HTMLInputElement>document.getElementById("inventoryName")).value =result.inventoryName;
       (<HTMLInputElement>document.getElementById("operationDate")).value =formatDate(result.operationDate,'yyyy-MM-dd',"en-US");
@@ -99,7 +100,7 @@ this.url="https://localhost:7064/";
         let indexData  = this.data.findIndex((x:any)=>   x.id === batchProduct.productId);
        // alert(batchProduct.productId);
         this.data.splice(indexData,1);
-        this.totalAmount = this.totalAmount + (batchProduct.count* batchProduct.price);
+
        });
      
     }, error => console.error(error));
@@ -130,10 +131,7 @@ this.url="https://localhost:7064/";
   }
 
 
-  addPrice(event: any){
-    this.newBatchProduct.price = event.target.value;
-   
-  }
+
 
   addCount(event: any){
     this.newBatchProduct.count = event.target.value;
@@ -148,7 +146,7 @@ this.url="https://localhost:7064/";
     this.newBatchProduct.productNameAR = this.newBatchProduct.product.nameAR;
    this.batchProducts.push(this.newBatchProduct);
 
-   this.CaluclateTotal();
+
 
    this.data.forEach((value: { id: number; },index: any)=>{
     if(value.id==this.newBatchProduct.productId) this.data.splice(index,1);});
@@ -163,12 +161,7 @@ ReomveProductFromSearch(){
 }
 
 
-CaluclateTotal(){
-  this.totalAmount = 0;
-  this.batchProducts.forEach((batchProduct:BatchProduct) =>{
-    this.totalAmount = this.totalAmount + (batchProduct.count* batchProduct.price);
-   });
-}
+
 
 
   deleteProduct(id:number){
@@ -183,7 +176,7 @@ CaluclateTotal(){
       this.batchProducts.forEach((value:any,index: any)=>{
         if(value.productId==id) this.batchProducts.splice(index,1);
     });
-    this.CaluclateTotal();
+
     }, error => console.error(error));
    
 
@@ -204,13 +197,18 @@ CaluclateTotal(){
   console.log(this.batch);
     console.log(newBatch);
    
-      this.CaluclateTotal();
+
       var batch = new Batch;
-      if(newBatch.controls.code.value){
-      batch.code = newBatch.controls.code.value;
+      if(newBatch.controls.bookNo.value){
+      batch.bookNo = newBatch.controls.bookNo.value;
       }else{
-        batch.code = this.batch.code;
+        batch.bookNo = this.batch.bookNo;
       }
+      if(newBatch.controls.invoiceNo.value){
+        batch.invoiceNo = newBatch.controls.invoiceNo.value;
+        }else{
+          batch.invoiceNo = this.batch.invoiceNo;
+        }
       if(newBatch.controls.supplierName.value){ batch.supplierName = newBatch.controls.supplierName.value;}else{
         batch.supplierName = this.batch.supplierName;
       }
@@ -233,7 +231,7 @@ CaluclateTotal(){
 
 
       batch.productCount = this.batchProducts.length;
-      batch.totalAmount = this.totalAmount;
+      
       batch.BatchProducts = this.batchProducts;
 
       batch.batchId = this.batchId;
@@ -266,7 +264,6 @@ class productBuffer{
 
   batchId!:number;
   productId!:number;
-  price: number = 0;
   count: number = 1;
   btachType!:number;
   operationDate!:any;
@@ -277,7 +274,6 @@ productNameAR!:string;
 class BatchProduct{
   batchId!:number;
   productId!:number;
-  price: number = 0;
   count: number = 1;
   btachType!:number;
   operationDate!:any;
@@ -287,13 +283,13 @@ class BatchProduct{
 
 class Batch{
   batchId!:number;
-  code!:string;
+  bookNo!:string;
+  invoiceNo!:string;
   supplierName!:string;
   inventoryName!:string;
   btachType!:number;
   operationDate!:any;
-  productCount!:number;
-  totalAmount!:number;
+  productCount!:number
 
   BatchProducts: BatchProduct[] = [];
 }

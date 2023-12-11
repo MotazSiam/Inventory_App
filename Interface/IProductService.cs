@@ -16,5 +16,7 @@ namespace Inventory_App.Interface
         public IEnumerable<Product> GetByTypeId(int typeId);
         public IEnumerable<Product> GetByBrandId(int brandId);
         public IEnumerable<Product> GetByCategoryId(int categoryId);
+
+        public List<ProductDTO> GetSparePartsByProductId(int productId);
     }
 }

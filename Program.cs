@@ -102,9 +102,7 @@ builder.Services.AddScoped(typeof(ICategoryService), typeof(CategoryService));
 builder.Services.AddScoped(typeof(ITypeService), typeof(TypeService));
 builder.Services.AddScoped(typeof(IBatchService), typeof(BatchService));
 builder.Services.AddScoped(typeof(IUserService), typeof(UserService));
-builder.Services.AddScoped(typeof(ICustomerService), typeof(CustomerService));
 
-builder.Services.AddScoped(typeof(IBillService), typeof(BillService));
 
 
 builder.Services.AddScoped(typeof(SignInManager<User>), typeof(SignInManager<User>));
