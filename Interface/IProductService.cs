@@ -1,5 +1,7 @@
-﻿using Inventory_App.DTO.ProductDTOs;
+﻿using BanArab_App.DTO.ProductDTOs;
+using Inventory_App.DTO.ProductDTOs;
 using Inventory_App.Entities;
+using Inventory_App.Services;
 
 namespace Inventory_App.Interface
 {
@@ -17,6 +19,9 @@ namespace Inventory_App.Interface
         public IEnumerable<Product> GetByBrandId(int brandId);
         public IEnumerable<Product> GetByCategoryId(int categoryId);
 
-        public List<ProductDTO> GetSparePartsByProductId(int productId);
+        public List<ProductDTO> GetSparePartsByProductId(string keyword);
+        public  Task<string> UploadImage(ImageObj upload);
+
+        public List<Product> searchProduct(RequestSearchProductDTO searchDto);
     }
 }

@@ -1,8 +1,12 @@
-﻿using Inventory_App.DTO.ProductDTOs;
+﻿using BanArab_App.DTO.ProductDTOs;
+using Inventory_App.DTO.ProductDTOs;
 using Inventory_App.Entities;
 using Inventory_App.Interface;
+using Inventory_App.Services;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.IO;
 
 namespace Inventory_App.Controllers
 {
@@ -23,6 +27,18 @@ namespace Inventory_App.Controllers
             _productService.Create(request);
             return Ok();
         }
+        [HttpPost("UploadImg")]
+        public async Task<ActionResult<ImageObj>> UploadImage([FromBody] ImageObj request)
+        {
+            var path = await   _productService.UploadImage(request);
+            var result = new ImageObj
+            {
+                imgUrl = path
+            };
+            return Ok(result);
+        }
+
+
         [HttpGet("GetByBrand")]
         public IEnumerable<Product> GetByBrand(int id)
         {
@@ -81,9 +97,16 @@ namespace Inventory_App.Controllers
         }
 
         [HttpGet("GetSpareParts")]
-        public List<ProductDTO> GetSpareParts(int productId)
+        public List<ProductDTO> GetSpareParts(string keyword)
         {
-            var result = _productService.GetSparePartsByProductId(productId);
+            var result = _productService.GetSparePartsByProductId(keyword);
+            return result;
+        }
+
+        [HttpPost("Search")]
+        public List<Product> search(RequestSearchProductDTO request)
+        {
+            var result = _productService.searchProduct(request);
             return result;
         }
 

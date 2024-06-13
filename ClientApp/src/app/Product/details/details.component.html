@@ -1,59 +1,73 @@
-<div style="margin-top: 20px;">
+<div style="margin-top: 20px;     display: flex; justify-content: space-between;">
 
   <a (click)="routeTo('Product')"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-          class="bi bi-arrow-left-circle-fill" viewBox="0 0 16 16">
-          <path
-              d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm3.5 7.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z" />
-      </svg>Back to list</a>
+      class="bi bi-arrow-left-circle-fill" viewBox="0 0 16 16">
+      <path
+        d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm3.5 7.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z" />
+    </svg>Back to list</a>
+
+
+  <a style="    width: 50px;    text-align: center;" (click)="showPrintDiv(true)"><svg width="50" height="50"
+      version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
+      y="0px" viewBox="0 0 122.88 114.13" style="enable-background:new 0 0 122.88 114.13" xml:space="preserve">
+      <g>
+        <path
+          d="M23.2,29.44V3.35V0.53C23.2,0.24,23.44,0,23.73,0h2.82h54.99c0.09,0,0.17,0.02,0.24,0.06l1.93,0.8l-0.2,0.49l0.2-0.49 c0.08,0.03,0.14,0.08,0.2,0.14l12.93,12.76l0.84,0.83l-0.37,0.38l0.37-0.38c0.1,0.1,0.16,0.24,0.16,0.38v1.18v13.31 c0,0.29-0.24,0.53-0.53,0.53h-5.61c-0.29,0-0.53-0.24-0.53-0.53v-6.88H79.12H76.3c-0.29,0-0.53-0.24-0.53-0.53 c0-0.02,0-0.03,0-0.05v-2.77h0V6.69H29.89v22.75c0,0.29-0.24,0.53-0.53,0.53h-5.64C23.44,29.97,23.2,29.73,23.2,29.44L23.2,29.44z M30.96,67.85h60.97h0c0.04,0,0.08,0,0.12,0.01c0.83,0.02,1.63,0.19,2.36,0.49c0.79,0.33,1.51,0.81,2.11,1.41 c0.59,0.59,1.07,1.31,1.4,2.1c0.3,0.73,0.47,1.52,0.49,2.35c0.01,0.04,0.01,0.08,0.01,0.12v0v9.24h13.16h0c0.04,0,0.07,0,0.11,0.01 c0.57-0.01,1.13-0.14,1.64-0.35c0.57-0.24,1.08-0.59,1.51-1.02c0.43-0.43,0.78-0.94,1.02-1.51c0.21-0.51,0.34-1.07,0.35-1.65 c-0.01-0.03-0.01-0.07-0.01-0.1v0V43.55v0c0-0.04,0-0.07,0.01-0.11c-0.01-0.57-0.14-1.13-0.35-1.64c-0.24-0.56-0.59-1.08-1.02-1.51 c-0.43-0.43-0.94-0.78-1.51-1.02c-0.51-0.22-1.07-0.34-1.65-0.35c-0.03,0.01-0.07,0.01-0.1,0.01h0H11.31h0 c-0.04,0-0.08,0-0.11-0.01c-0.57,0.01-1.13,0.14-1.64,0.35C9,39.51,8.48,39.86,8.05,40.29c-0.43,0.43-0.78,0.94-1.02,1.51 c-0.21,0.51-0.34,1.07-0.35,1.65c0.01,0.03,0.01,0.07,0.01,0.1v0v35.41v0c0,0.04,0,0.08-0.01,0.11c0.01,0.57,0.14,1.13,0.35,1.64 c0.24,0.57,0.59,1.08,1.02,1.51C8.48,82.65,9,83,9.56,83.24c0.51,0.22,1.07,0.34,1.65,0.35c0.03-0.01,0.07-0.01,0.1-0.01h0h13.16 v-9.24v0c0-0.04,0-0.08,0.01-0.12c0.02-0.83,0.19-1.63,0.49-2.35c0.31-0.76,0.77-1.45,1.33-2.03c0.02-0.03,0.04-0.06,0.07-0.08 c0.59-0.59,1.31-1.07,2.1-1.4c0.73-0.3,1.52-0.47,2.36-0.49C30.87,67.85,30.91,67.85,30.96,67.85L30.96,67.85L30.96,67.85z M98.41,90.27v17.37v0c0,0.04,0,0.08-0.01,0.12c-0.02,0.83-0.19,1.63-0.49,2.36c-0.33,0.79-0.81,1.51-1.41,2.11 c-0.59,0.59-1.31,1.07-2.1,1.4c-0.73,0.3-1.52,0.47-2.35,0.49c-0.04,0.01-0.08,0.01-0.12,0.01h0H30.96h0 c-0.04,0-0.08-0.01-0.12-0.01c-0.83-0.02-1.62-0.19-2.35-0.49c-0.79-0.33-1.5-0.81-2.1-1.4c-0.6-0.6-1.08-1.31-1.41-2.11 c-0.3-0.73-0.47-1.52-0.49-2.35c-0.01-0.04-0.01-0.08-0.01-0.12v0V90.27H11.31h0c-0.04,0-0.08,0-0.12-0.01 c-1.49-0.02-2.91-0.32-4.2-0.85c-1.39-0.57-2.63-1.41-3.67-2.45c-1.04-1.04-1.88-2.28-2.45-3.67c-0.54-1.3-0.84-2.71-0.85-4.2 C0,79.04,0,79,0,78.96v0V43.55v0c0-0.04,0-0.08,0.01-0.12c0.02-1.49,0.32-2.9,0.85-4.2c0.57-1.39,1.41-2.63,2.45-3.67 c1.04-1.04,2.28-1.88,3.67-2.45c1.3-0.54,2.71-0.84,4.2-0.85c0.04-0.01,0.08-0.01,0.12-0.01h0h100.25h0c0.04,0,0.08,0,0.12,0.01 c1.49,0.02,2.91,0.32,4.2,0.85c1.39,0.57,2.63,1.41,3.67,2.45c1.04,1.04,1.88,2.28,2.45,3.67c0.54,1.3,0.84,2.71,0.85,4.2 c0.01,0.04,0.01,0.08,0.01,0.12v0v35.41v0c0,0.04,0,0.08-0.01,0.12c-0.02,1.49-0.32,2.9-0.85,4.2c-0.57,1.39-1.41,2.63-2.45,3.67 c-1.04,1.04-2.28,1.88-3.67,2.45c-1.3,0.54-2.71,0.84-4.2,0.85c-0.04,0.01-0.08,0.01-0.12,0.01h0H98.41L98.41,90.27z M89.47,15.86 l-7-6.91v6.91H89.47L89.47,15.86z M91.72,74.54H31.16v32.89h60.56V74.54L91.72,74.54z" />
+      </g>
+    </svg>Print</a>
 </div>
 <h2>Product details</h2>
 <br>
+<img [src]="url+product.img">
 <div class="Batch-Header-details">
   <div class="container-fluid">
-    <div class="row" >
-   
-            <dt class="col-sm-2">Name:</dt>
-            <dd class="col-sm-4"> {{product.name}}</dd>
-         
-            <dt class="col-sm-2"> NameAR :</dt>
-            <dd class="col-sm-4">{{product.nameAR}}</dd>
-        
-        
-          
-            <dt class="col-sm-2"> Description :</dt>
-            <dd class="col-sm-4">{{product.description}}</dd>
-           
-            <dt class="col-sm-2">Name:</dt>
-            <dd class="col-sm-4"> {{product.name}}</dd>
-         
-            <dt class="col-sm-2"> Model :</dt>
-            <dd class="col-sm-4">{{product.model}}</dd>
-        
-        
-          
-            <dt class="col-sm-2">Size :</dt>
-            <dd class="col-sm-4">{{product.size}}</dd>
+    <div class="row">
 
-                <dt class="col-sm-2"> Code :</dt>
-            <dd class="col-sm-4">{{product.code}}</dd>
-           
-            <dt class="col-sm-2">Electricity :</dt>
-            <dd class="col-sm-4"> {{product.electricity}}</dd>
-         
-            <dt class="col-sm-2"> Engine :</dt>
-            <dd class="col-sm-4">{{product.engine}}</dd>
-        
-        
-          
-            <dt class="col-sm-2">Start Stock :</dt>
-            <dd class="col-sm-4">{{product.startStock}}</dd>
-         
-         
-        
-            <dt class="col-sm-2"> Stock Count :</dt>
-            <dd class="col-sm-4">{{product.stockCount}}</dd>
-         
-  
+      <dt class="col-sm-2">Name:</dt>
+      <dd class="col-sm-4"> {{product.name}}</dd>
+
+      <dt class="col-sm-2"> NameAR :</dt>
+      <dd class="col-sm-4">{{product.nameAR}}</dd>
+
+
+
+      <dt class="col-sm-2"> Description :</dt>
+      <dd class="col-sm-4">{{product.description}}</dd>
+
+
+      <dt class="col-sm-2"> Model :</dt>
+      <dd class="col-sm-4">{{product.model}}</dd>
+
+
+
+      <dt class="col-sm-2">Size :</dt>
+      <dd class="col-sm-4">{{product.size}}</dd>
+
+      <dt class="col-sm-2"> Code :</dt>
+      <dd class="col-sm-4">{{product.code}}</dd>
+
+      <dt class="col-sm-2">Electricity :</dt>
+      <dd class="col-sm-4"> {{product.electricity}}</dd>
+
+      <dt class="col-sm-2"> Engine :</dt>
+      <dd class="col-sm-4">{{product.engine}}</dd>
+
+      <dt class="col-sm-2"> Unit :</dt>
+      <dd class="col-sm-4">{{product.unit}}</dd>
+      <dt class="col-sm-2"> Cost :</dt>
+      <dd class="col-sm-4" >{{product.cost}} USD</dd>
+      <dt class="col-sm-2"> Price :</dt>
+      <dd class="col-sm-4" style=" font-weight: bolder;">{{product.price}} USD</dd>
+
+      <dt class="col-sm-2">Start Stock :</dt>
+      <dd class="col-sm-4">{{product.startStock}}</dd>
+
+
+
+      <dt class="col-sm-2"> Stock Count :</dt>
+      <dd class="col-sm-4">{{product.stockCount}}</dd>
+
+
     </div>
   </div>
 </div>
@@ -61,137 +75,173 @@
 
 
 
-<table class='table table-striped table-hover table-bordered' aria-labelledby="tableLabel" *ngIf="product.batchProducts.length">
-    <thead>
-      <tr>
-      
-       <th>Operation date</th>
-       <th>Operation Type</th>
-       <th>Count</th>
-   
-       <th></th>
-        
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let batch of product.batchProducts">
-      
-        <td>{{batch.operationDate | date :'mediumDate'}}</td>
-        <td *ngIf="batch.btachType==0">Increase <svg style="color: #2aa32a;" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-file-plus-fill" viewBox="0 0 16 16">
-            <path d="M12 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM8.5 6v1.5H10a.5.5 0 0 1 0 1H8.5V10a.5.5 0 0 1-1 0V8.5H6a.5.5 0 0 1 0-1h1.5V6a.5.5 0 0 1 1 0z"/>
-          </svg></td>
-          <td class="col-sm-4" *ngIf="batch.btachType == 1">Decrease <svg style="color: rgb(255, 2, 2);" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-file-minus" viewBox="0 0 16 16">
-            <path d="M5.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H6a.5.5 0 0 1-.5-.5z"/>
-            <path d="M4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H4zm0 1h8a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1z"/>
-          </svg></td>
-        <td>{{batch.count}}</td>
-        <td><a  (click)="routeTo('Batch')" >more detials</a></td>
-      </tr>
-      <tr>
-        <td>Total</td>
-        <td></td> 
-        <td>{{product.stockCount }}</td>
-      
-        <td></td>
-     
-      </tr>
-    </tbody>
-  </table>
-  
-  <div *ngIf="true"   class="preview"  #dataToExport >
-    <button  (click)="saveDiv()">Print</button>
-    <button >Close</button>
-  <div  id="content">
+<table class='table table-striped table-hover table-bordered' aria-labelledby="tableLabel"
+  *ngIf="product.batchProducts.length">
+  <thead>
+    <tr>
+
+      <th>Operation date</th>
+      <th>Operation Type</th>
+      <th>Count</th>
+      <th>Price</th>
+      <th>Supplier/Customer Name</th>
+       <!-- <th>Total Amount</th> -->
+
+      <th></th>
+
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let batch of product.batchProducts">
+
+      <td>{{batch.operationDate | date :'mediumDate'}}</td>
+      <td *ngIf="batch.btachType==0">Increase <svg style="color: #2aa32a;" xmlns="http://www.w3.org/2000/svg" width="20"
+          height="20" fill="currentColor" class="bi bi-file-plus-fill" viewBox="0 0 16 16">
+          <path
+            d="M12 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM8.5 6v1.5H10a.5.5 0 0 1 0 1H8.5V10a.5.5 0 0 1-1 0V8.5H6a.5.5 0 0 1 0-1h1.5V6a.5.5 0 0 1 1 0z" />
+        </svg></td>
+      <td class="col-sm-4" *ngIf="batch.btachType == 1">Decrease <svg style="color: rgb(255, 2, 2);"
+          xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-file-minus"
+          viewBox="0 0 16 16">
+          <path d="M5.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H6a.5.5 0 0 1-.5-.5z" />
+          <path
+            d="M4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H4zm0 1h8a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1z" />
+        </svg></td>
+      <td>{{batch.count}}</td>
+      <td>{{batch.price}} USD</td>
+      <td>{{batch.supplierName}}</td>
+      <!-- <td *ngIf="batch.btachType==0" style="color: rgb(255, 2, 2);     font-weight: 700;">{{(batch.price  * batch.count)  }}</td>
+        <td  *ngIf="batch.btachType == 1"  style="color:  #2aa32a;     font-weight: 700;">{{(batch.price  * batch.count)  }}</td> -->
+      <td><a (click)="routeTo('Batch')">more detials</a></td>
+    </tr>
+    <tr>
+      <td>Total</td>
+      <td></td> 
+      <td>{{product.stockCount }}</td>
+      <td></td>
+      <!-- <td>{{totalAmount}}</td> -->
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+
+<div *ngIf="print" class="preview">
+  <div style="    display: flex; justify-content: space-between;">
+    <a style="margin-top: 20px;    margin-left: 20px;" (click)="printDiv('content')"><svg version="1.1" id="Layer_1"
+        xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+        viewBox="0 0 122.88 114.13" style="enable-background:new 0 0 122.88 114.13" xml:space="preserve">
+        <g>
+          <path
+            d="M23.2,29.44V3.35V0.53C23.2,0.24,23.44,0,23.73,0h2.82h54.99c0.09,0,0.17,0.02,0.24,0.06l1.93,0.8l-0.2,0.49l0.2-0.49 c0.08,0.03,0.14,0.08,0.2,0.14l12.93,12.76l0.84,0.83l-0.37,0.38l0.37-0.38c0.1,0.1,0.16,0.24,0.16,0.38v1.18v13.31 c0,0.29-0.24,0.53-0.53,0.53h-5.61c-0.29,0-0.53-0.24-0.53-0.53v-6.88H79.12H76.3c-0.29,0-0.53-0.24-0.53-0.53 c0-0.02,0-0.03,0-0.05v-2.77h0V6.69H29.89v22.75c0,0.29-0.24,0.53-0.53,0.53h-5.64C23.44,29.97,23.2,29.73,23.2,29.44L23.2,29.44z M30.96,67.85h60.97h0c0.04,0,0.08,0,0.12,0.01c0.83,0.02,1.63,0.19,2.36,0.49c0.79,0.33,1.51,0.81,2.11,1.41 c0.59,0.59,1.07,1.31,1.4,2.1c0.3,0.73,0.47,1.52,0.49,2.35c0.01,0.04,0.01,0.08,0.01,0.12v0v9.24h13.16h0c0.04,0,0.07,0,0.11,0.01 c0.57-0.01,1.13-0.14,1.64-0.35c0.57-0.24,1.08-0.59,1.51-1.02c0.43-0.43,0.78-0.94,1.02-1.51c0.21-0.51,0.34-1.07,0.35-1.65 c-0.01-0.03-0.01-0.07-0.01-0.1v0V43.55v0c0-0.04,0-0.07,0.01-0.11c-0.01-0.57-0.14-1.13-0.35-1.64c-0.24-0.56-0.59-1.08-1.02-1.51 c-0.43-0.43-0.94-0.78-1.51-1.02c-0.51-0.22-1.07-0.34-1.65-0.35c-0.03,0.01-0.07,0.01-0.1,0.01h0H11.31h0 c-0.04,0-0.08,0-0.11-0.01c-0.57,0.01-1.13,0.14-1.64,0.35C9,39.51,8.48,39.86,8.05,40.29c-0.43,0.43-0.78,0.94-1.02,1.51 c-0.21,0.51-0.34,1.07-0.35,1.65c0.01,0.03,0.01,0.07,0.01,0.1v0v35.41v0c0,0.04,0,0.08-0.01,0.11c0.01,0.57,0.14,1.13,0.35,1.64 c0.24,0.57,0.59,1.08,1.02,1.51C8.48,82.65,9,83,9.56,83.24c0.51,0.22,1.07,0.34,1.65,0.35c0.03-0.01,0.07-0.01,0.1-0.01h0h13.16 v-9.24v0c0-0.04,0-0.08,0.01-0.12c0.02-0.83,0.19-1.63,0.49-2.35c0.31-0.76,0.77-1.45,1.33-2.03c0.02-0.03,0.04-0.06,0.07-0.08 c0.59-0.59,1.31-1.07,2.1-1.4c0.73-0.3,1.52-0.47,2.36-0.49C30.87,67.85,30.91,67.85,30.96,67.85L30.96,67.85L30.96,67.85z M98.41,90.27v17.37v0c0,0.04,0,0.08-0.01,0.12c-0.02,0.83-0.19,1.63-0.49,2.36c-0.33,0.79-0.81,1.51-1.41,2.11 c-0.59,0.59-1.31,1.07-2.1,1.4c-0.73,0.3-1.52,0.47-2.35,0.49c-0.04,0.01-0.08,0.01-0.12,0.01h0H30.96h0 c-0.04,0-0.08-0.01-0.12-0.01c-0.83-0.02-1.62-0.19-2.35-0.49c-0.79-0.33-1.5-0.81-2.1-1.4c-0.6-0.6-1.08-1.31-1.41-2.11 c-0.3-0.73-0.47-1.52-0.49-2.35c-0.01-0.04-0.01-0.08-0.01-0.12v0V90.27H11.31h0c-0.04,0-0.08,0-0.12-0.01 c-1.49-0.02-2.91-0.32-4.2-0.85c-1.39-0.57-2.63-1.41-3.67-2.45c-1.04-1.04-1.88-2.28-2.45-3.67c-0.54-1.3-0.84-2.71-0.85-4.2 C0,79.04,0,79,0,78.96v0V43.55v0c0-0.04,0-0.08,0.01-0.12c0.02-1.49,0.32-2.9,0.85-4.2c0.57-1.39,1.41-2.63,2.45-3.67 c1.04-1.04,2.28-1.88,3.67-2.45c1.3-0.54,2.71-0.84,4.2-0.85c0.04-0.01,0.08-0.01,0.12-0.01h0h100.25h0c0.04,0,0.08,0,0.12,0.01 c1.49,0.02,2.91,0.32,4.2,0.85c1.39,0.57,2.63,1.41,3.67,2.45c1.04,1.04,1.88,2.28,2.45,3.67c0.54,1.3,0.84,2.71,0.85,4.2 c0.01,0.04,0.01,0.08,0.01,0.12v0v35.41v0c0,0.04,0,0.08-0.01,0.12c-0.02,1.49-0.32,2.9-0.85,4.2c-0.57,1.39-1.41,2.63-2.45,3.67 c-1.04,1.04-2.28,1.88-3.67,2.45c-1.3,0.54-2.71,0.84-4.2,0.85c-0.04,0.01-0.08,0.01-0.12,0.01h0H98.41L98.41,90.27z M89.47,15.86 l-7-6.91v6.91H89.47L89.47,15.86z M91.72,74.54H31.16v32.89h60.56V74.54L91.72,74.54z" />
+        </g>
+      </svg>Print</a>
+    <button (click)="showPrintDiv(false)" style="height: fit-content;">Close</button>
+  </div>
+  <div id="content">
     <div class="Batch-Header-details">
       <div class="container-fluid">
-        <h4> Date: 24/10/2023</h4>
-        <div class="row" >
-       
-                <dt class="col-sm-2">Name:</dt>
-                <dd class="col-sm-4"> {{product.name}}</dd>
-             
-                <dt class="col-sm-2"> NameAR :</dt>
-                <dd class="col-sm-4">{{product.nameAR}}</dd>
-            
-            
-              
-                <dt class="col-sm-2"> Description :</dt>
-                <dd class="col-sm-4">{{product.description}}</dd>
-               
-                <dt class="col-sm-2">Name:</dt>
-                <dd class="col-sm-4"> {{product.name}}</dd>
-             
-                <dt class="col-sm-2"> Model :</dt>
-                <dd class="col-sm-4">{{product.model}}</dd>
-            
-            
-              
-                <dt class="col-sm-2">Size :</dt>
-                <dd class="col-sm-4">{{product.size}}</dd>
-    
-                    <dt class="col-sm-2"> Code :</dt>
-                <dd class="col-sm-4">{{product.code}}</dd>
-               
-                <dt class="col-sm-2">Electricity :</dt>
-                <dd class="col-sm-4"> {{product.electricity}}</dd>
-             
-                <dt class="col-sm-2"> Engine :</dt>
-                <dd class="col-sm-4">{{product.engine}}</dd>
-            
-            
-              
-                <dt class="col-sm-2">Start Stock :</dt>
-                <dd class="col-sm-4">{{product.startStock}}</dd>
-             
-             
-            
-                <dt class="col-sm-2"> Stock Count :</dt>
-                <dd class="col-sm-4">{{product.stockCount}}</dd>
-             
-      
+
+        <hr>
+        <h4> Date:</h4>
+        <br>
+        <div class="row">
+
+          <dt class="col-sm-2">Name:</dt>
+          <dd class="col-sm-4"> {{product.name}}</dd>
+
+          <dt class="col-sm-2"> NameAR :</dt>
+          <dd class="col-sm-4">{{product.nameAR}}</dd>
+
+
+
+          <dt class="col-sm-2"> Description :</dt>
+          <dd class="col-sm-4">{{product.description}}</dd>
+
+
+          <dt class="col-sm-2"> Model :</dt>
+          <dd class="col-sm-4">{{product.model}}</dd>
+
+
+
+          <dt class="col-sm-2">Size :</dt>
+          <dd class="col-sm-4">{{product.size}}</dd>
+
+          <dt class="col-sm-2"> Code :</dt>
+          <dd class="col-sm-4">{{product.code}}</dd>
+
+          <dt class="col-sm-2">Electricity :</dt>
+          <dd class="col-sm-4"> {{product.electricity}}</dd>
+
+          <dt class="col-sm-2"> Engine :</dt>
+          <dd class="col-sm-4">{{product.engine}}</dd>
+
+          <dt class="col-sm-2"> Unit :</dt>
+          <dd class="col-sm-4">{{product.unit}}</dd>
+          <dt class="col-sm-2"> Cost :</dt>
+          <dd class="col-sm-4">{{product.cost}}</dd>
+          <dt class="col-sm-2"> Price :</dt>
+          <dd class="col-sm-4">{{product.price}}</dd>
+
+          <dt class="col-sm-2">Start Stock :</dt>
+          <dd class="col-sm-4">{{product.startStock}}</dd>
+
+
+
+          <dt class="col-sm-2"> Stock Count :</dt>
+          <dd class="col-sm-4">{{product.stockCount}}</dd>
+
+
         </div>
       </div>
     </div>
 
-    <table class='table table-striped table-hover table-bordered' aria-labelledby="tableLabel" *ngIf="product.batchProducts.length">
+    <table class='table table-striped table-hover table-bordered' aria-labelledby="tableLabel"
+      *ngIf="product.batchProducts.length">
       <thead>
         <tr>
-        
-         <th>Operation date</th>
-         <th>Operation Type</th>
-         <th>Count</th>
-     
-       
-          
+
+          <th>Operation date</th>
+          <th>Operation Type</th>
+          <th>Count</th>
+          <th>Price</th>
+          <th>Supplier/Customer Name</th>
+          <!-- <th>Total Amount</th> -->
+
+
+
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let batch of product.batchProducts">
-        
+
           <td>{{batch.operationDate | date :'mediumDate'}}</td>
-          <td *ngIf="batch.btachType==0">Increase <svg style="color: #2aa32a;" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-file-plus-fill" viewBox="0 0 16 16">
-              <path d="M12 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM8.5 6v1.5H10a.5.5 0 0 1 0 1H8.5V10a.5.5 0 0 1-1 0V8.5H6a.5.5 0 0 1 0-1h1.5V6a.5.5 0 0 1 1 0z"/>
+          <td *ngIf="batch.btachType == 0"> Increase <svg style="color: #2aa32a;" xmlns="http://www.w3.org/2000/svg"
+              width="20" height="20" fill="currentColor" class="bi bi-file-plus-fill" viewBox="0 0 16 16">
+              <path
+                d="M12 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM8.5 6v1.5H10a.5.5 0 0 1 0 1H8.5V10a.5.5 0 0 1-1 0V8.5H6a.5.5 0 0 1 0-1h1.5V6a.5.5 0 0 1 1 0z" />
             </svg></td>
-            <td class="col-sm-4" *ngIf="batch.btachType == 1">Decrease <svg style="color: rgb(255, 2, 2);" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-file-minus" viewBox="0 0 16 16">
-              <path d="M5.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H6a.5.5 0 0 1-.5-.5z"/>
-              <path d="M4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H4zm0 1h8a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1z"/>
+          <td class="col-sm-4" *ngIf="batch.btachType == 1">Decrease <svg style="color: rgb(255, 2, 2);"
+              xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-file-minus"
+              viewBox="0 0 16 16">
+              <path d="M5.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H6a.5.5 0 0 1-.5-.5z" />
+              <path
+                d="M4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H4zm0 1h8a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1z" />
             </svg></td>
           <td>{{batch.count}}</td>
-         
+          <td>{{batch.price}} USD</td>
+          <td>{{batch.supplierName}}</td>
+          <!-- <td *ngIf="batch.btachType==0" style="color: rgb(255, 2, 2);     font-weight: 700;">{{(batch.price  * batch.count)  }}</td>
+          <td  *ngIf="batch.btachType == 1"  style="color:  #2aa32a;     font-weight: 700;">{{(batch.price  * batch.count)  }}</td> -->
         </tr>
         <tr>
           <td>Total</td>
-          <td></td> 
+          <td></td>
           <td>{{product.stockCount }}</td>
-        
-       
-       
+          <td></td>
+          <!-- <td>{{totalAmount}}</td> -->
+          <td></td>
         </tr>
       </tbody>
     </table>
   </div>
 </div>
-
-<script>
-  
-</script>

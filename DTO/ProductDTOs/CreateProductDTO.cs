@@ -15,7 +15,9 @@ namespace Inventory_App.DTO.ProductDTOs
         public string img { get; set; } = "";
         public string unit { get; set; } = "piece";
         public bool isSpare { get; set; } = false;
-        public int? spareForProductId { get; set; }
+        public string spareForProducts { get; set; } = "";
+        public decimal cost { get; set; } = 0;
+        public decimal price { get; set; } = 0;
         public int startStock { get; set; }
         public int brandId { get; set; }
         public int typeId { get; set; }
@@ -35,7 +37,9 @@ namespace Inventory_App.DTO.ProductDTOs
                 Engine = engine,
                 brandId = brandId,
                 StartStock = startStock,
-                SpareForProductId = spareForProductId,
+                Price = price,
+                Cost = cost,
+                SpareForProducts = spareForProducts,
                 IsSpare = isSpare,
                 Img = img,
                 Unit = unit,

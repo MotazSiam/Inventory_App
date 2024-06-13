@@ -2,7 +2,14 @@
 using Inventory_App.DTO.ProductDTOs;
 using Inventory_App.Entities;
 using Inventory_App.Interface;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Hosting;
+using IHostingEnvironment = Microsoft.AspNetCore.Hosting.IHostingEnvironment;
+using static System.Net.Mime.MediaTypeNames;
+using System.Collections;
+using BanArab_App.DTO.ProductDTOs;
+using static Microsoft.Extensions.Logging.EventSource.LoggingEventSource;
 
 namespace Inventory_App.Services
 {
@@ -12,13 +19,16 @@ namespace Inventory_App.Services
         private readonly IGenericRepository<Product> Repo;
         private readonly IGenericRepository<BatchProduct> _RepoBatchProduct;
         private readonly IGenericRepository<BillProduct> _RepoBillProduct;
+        private readonly IHostingEnvironment _HostingEnvironment;
 
 
-        public ProductService(IGenericRepository<Product> repo, IGenericRepository<BatchProduct> repoBatchProduct, IGenericRepository<BillProduct> repoBillProduct)
+        public ProductService(IGenericRepository<Product> repo, IGenericRepository<BatchProduct> repoBatchProduct,
+            IGenericRepository<BillProduct> repoBillProduct, IHostingEnvironment hostingEnvironment)
         {
             Repo = repo;
             _RepoBatchProduct = repoBatchProduct;
             _RepoBillProduct = repoBillProduct;
+            _HostingEnvironment = hostingEnvironment;
         }
 
         public IEnumerable<Product> GetByBrandId(int brandId)
@@ -62,6 +72,14 @@ namespace Inventory_App.Services
             Add(entity);
         }
 
+        public List<Product> searchProduct(RequestSearchProductDTO searchDto)
+        {
+            string key = $"%{searchDto.keyword}%";
+            var result = Repo.GetAll(p => p.IsSpare == searchDto.isSpare &&
+            (EF.Functions.Like(p.Name, key) || EF.Functions.Like(p.NameAR, key) || EF.Functions.Like(p.SpareForProducts, key))).Value
+            .Include(p => p.Brand).Include(p => p.Category).Include(p => p.Type).ToList();
+            return result;
+        }
         public void Remove(int id)
         {
             var brand = Repo.GetById(id);
@@ -76,7 +94,7 @@ namespace Inventory_App.Services
                 throw new Exception("not exist");
             }
             var entity = Repo.GetById(id);
-            var batchProducts = _RepoBatchProduct.GetAll(pb => pb.ProductId == id && !pb.IsDeleted).Value.Select(pb=> new BatchProductDTO().GetDTO(pb)).ToList();
+            var batchProducts = _RepoBatchProduct.GetAll(pb => pb.ProductId == id && !pb.IsDeleted).Value.Include(bp => bp.Batch).Select(pb=> new BatchProductDTO().GetDTO(pb)).ToList();
             var result = new ProductDTO().GetDTO(entity);
             result.stockCount = CalculateProductCount(batchProducts, entity.StartStock);
             result.productByYearDTOs = GetProductByYear(id);
@@ -158,9 +176,10 @@ namespace Inventory_App.Services
 
 
 
-        public List<ProductDTO> GetSparePartsByProductId(int productId)
+        public List<ProductDTO> GetSparePartsByProductId(string keyword)
         {
-            var result =  Repo.GetAll(product=> product.SpareForProductId == productId).Value.Select(sp => new ProductDTO().GetDTO(sp)).ToList();
+            keyword = $"%{keyword}%";
+            var result =  Repo.GetAll(product=>EF.Functions.Like(product.SpareForProducts, keyword)).Value.Select(sp => new ProductDTO().GetDTO(sp)).ToList();
             return result;
         }
 
@@ -203,6 +222,40 @@ namespace Inventory_App.Services
         //    return count;
         //}
 
+
+        public async Task <string> UploadImage(ImageObj upload) 
+        {
+            if (upload.img is not null) {
+                //string filePath = Path.Combine(_HostingEnvironment.WebRootPath, "uploads\\products");
+                string filePath = Path.Combine( "uploads\\products",  $"{DateTime.Now.Year}-{DateTime.Now.Minute}-{DateTime.Now.Second}.png");
+
+                var file = ConvertStringIntoImage(upload);
+                string fullPath = Path.Combine(_HostingEnvironment.WebRootPath, filePath);
+                file.CopyTo(new FileStream(fullPath, FileMode.Create));
+                return filePath;
+            }
+            else
+            {
+                throw new Exception("Image is empty");
+            }
+
+        }
+
+        private IFormFile ConvertStringIntoImage(ImageObj obj)
+        {
+            string base64String = obj.img;
+
+            // Remove the data URI scheme (optional, depends on the source)
+            base64String = base64String.Replace($"data:{obj.fileType};base64,", "");
+
+            // Convert Base64 string to byte array
+            byte[] imageBytes = Convert.FromBase64String(base64String);
+
+           
+            var stream = new MemoryStream(imageBytes);
+            IFormFile file = new FormFile(stream, 0, imageBytes.Length, "img","images");
+            return file;
+        }
         private void Update(Product entity)
         {
             //var product = Repo.GetById(entity.Id);
@@ -216,6 +269,14 @@ namespace Inventory_App.Services
         //    var brand = requestDTO.GetEntity();
         //    Update(brand);
         //}
+
+    }
+
+    public class ImageObj
+    {
+        public string? img { get; set; }
+        public string? fileType { get; set; }
+        public string? imgUrl { get; set; }
 
     }
 }

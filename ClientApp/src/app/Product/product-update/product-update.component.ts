@@ -19,6 +19,8 @@ public cats : any;
 public types:any;
 public TypesByCat:any;
 
+
+base64Image: string | undefined;
 public selectedCat:any;
 public selectedType:any;
 public selectedBrand: any;
@@ -43,6 +45,7 @@ this.types = result;
   
   //alert(JSON.stringify(this.product));
 
+  console.log(result);
 
   this.selectedCat = result.categoryId;
   (<HTMLInputElement>document.getElementById("name")).value =  result.name;
@@ -54,7 +57,21 @@ this.types = result;
   (<HTMLInputElement>document.getElementById("electricity")).value =  result.electricity;
   (<HTMLInputElement>document.getElementById("engine")).value =result.engine;
   (<HTMLInputElement>document.getElementById("startStock")).value =  result.startStock;
+  (<HTMLInputElement>document.getElementById("price")).value =  result.price;
+  (<HTMLInputElement>document.getElementById("cost")).value =  result.cost;
+  (<HTMLInputElement>document.getElementById("spareForProducts")).value =  result.spareForProducts;
+  (<HTMLInputElement>document.getElementById("unit")).value =  result.unit;
 
+
+
+  if(result.isSpare ==0){
+    (<HTMLInputElement>document.getElementById("product")).click();
+  }
+  if(result.isSpare ==1){
+    (<HTMLInputElement>document.getElementById("spare")).click();
+  }
+
+  this.base64Image = this.url+result.img;
 
 
   this.selectCategory(this.selectedCat);
@@ -77,7 +94,34 @@ console.log(this.product);
 
 
   }
+
+  handleUpload(event: any) {
+    const file = event.target.files[0];
+
+    alert(JSON.stringify(file.type));
+    const reader = new FileReader();
+    reader.readAsDataURL(file); 
+    reader.onload = () => {
+        this.base64Image = reader.result?.toString();
+
+        var request : ImgRequest ={
+          img : this.base64Image,
+          fileType : file.type
+        };
+    
+        this.http.post<any>(this.url+"api/"+'product/UploadImg', request).subscribe(result => {
+          
+          this.product.img = result.imgUrl;
+        }, error => console.error( JSON.stringify(error)));
+ 
+
+    };
+
+   
+  }
   EditProduct(editProduct:any){
+
+    console.log(editProduct);
 
     if(editProduct.controls.name.value){
       this.product.name =   editProduct.controls.name.value;
@@ -124,6 +168,29 @@ console.log(this.product);
       }
 
 
+      if(editProduct.controls.unit.value){
+        this.product.unit = editProduct.controls.unit.value;
+       }
+      
+      if(editProduct.controls.isSpare.value == 1){
+        this.product.isSpare = true;
+      }else{
+        this.product.isSpare = false;
+      }
+      if(editProduct.controls.cost.value){
+        this.product.cost = editProduct.controls.cost.value;
+       }
+       if(editProduct.controls.price.value){
+        this.product.price = editProduct.controls.price.value;
+       }
+       if(editProduct.controls.spareForProducts.value){
+        this.product.spareForProducts = editProduct.controls.spareForProducts.value;
+       }
+    
+      // this.product.cost = editProduct.controls.cost.value;
+      // this.product.price = editProduct.controls.price.value;
+      // this.product.spareForProducts = editProduct.controls.spareForProducts.value;
+
       this.http.put<any>(this.url+ "api/"+'product', this.product).subscribe(result => { 
         this.router.navigateByUrl('/Product');
 
@@ -142,4 +209,9 @@ console.log(this.product);
     this.router.navigateByUrl('/'+link);
   }
 
+}
+
+interface ImgRequest{
+  img?:string;
+  fileType ?: string;
 }

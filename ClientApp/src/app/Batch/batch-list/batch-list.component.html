@@ -121,7 +121,8 @@
      <th>Product Name</th>
      <th>Product NameAr</th>
      <th>Count</th>
-    
+     <th>Price</th>
+     <th>Total Amount</th>
      <th></th>
       
     </tr>
@@ -132,7 +133,8 @@
       <td>{{product.productName}}</td>
       <td>{{product.productNameAR}}</td>
       <td>{{product.count}}</td>
-     
+      <td>{{product.price}}</td>
+      <td>{{(product.price  * product.count)  }}</td>
     
       <td><a href="/Products" >more detials</a></td>
     </tr>
@@ -141,7 +143,9 @@
       <td></td>
       <td>{{btachProductTotalCount}}</td>
       <td></td>
-   
+      <td>{{batchProductsTotalAmount}}</td>
+      <td></td>
+      
     </tr>
   </tbody>
 </table>

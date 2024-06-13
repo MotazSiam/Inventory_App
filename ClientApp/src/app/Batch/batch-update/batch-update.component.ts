@@ -10,6 +10,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class BatchUpdateComponent implements OnInit {
 
+  public isSpare: boolean = false;
+
   url:any;
   route: ActivatedRoute = inject(ActivatedRoute);
   batchId : number = 0 ;
@@ -49,7 +51,7 @@ this.url="https://localhost:7064/";
 
     //  alert(JSON.stringify(this.batchProducts));
       this.addProducts();
-
+      this.CaluclateTotal(); 
       (<HTMLInputElement>document.getElementById("bookNo")).value = result.bookNo;
       (<HTMLInputElement>document.getElementById("invoiceNo")).value = result.invoiceNo;
       (<HTMLInputElement>document.getElementById("supplierName")).value =result.supplierName;
@@ -88,6 +90,12 @@ this.url="https://localhost:7064/";
   }
 
 
+  CaluclateTotal(){
+    this.totalAmount = 0;
+    this.batchProducts.forEach((batchProduct:BatchProduct) =>{
+      this.totalAmount = this.totalAmount + (batchProduct.count* batchProduct.price);
+     });
+  }
   addProducts(){
    
     console.log( this.batchProducts);
@@ -95,19 +103,57 @@ this.url="https://localhost:7064/";
     this .http.get<any>(this.url+ "api/"+"product").subscribe(result => {
       this.data = result;
       this.list = this.data;
-      this.batchProducts.forEach((batchProduct:BatchProduct) =>{
-        batchProduct.product =  this.data.find((x:any) => x.id === batchProduct.productId);
-        let indexData  = this.data.findIndex((x:any)=>   x.id === batchProduct.productId);
-       // alert(batchProduct.productId);
-        this.data.splice(indexData,1);
-
-       });
+      this.products = result;
+      this.refreshProductList();
      
+      this.CaluclateTotal(); 
     }, error => console.error(error));
     
   }
 
+  SearchProduct(event: any) {
+    var req: searchDTO = {
+      keyword: event.target.value,
+      isSpare: this.isSpare
+    };
 
+
+    this.http.post<any>(this.url + "api/" + 'product/Search', req).subscribe(result => {
+      this.products = result;
+      this.list = this.products;
+      this.refreshProductList();
+    }, error => console.error(JSON.stringify(error)));
+
+
+
+  }
+
+  changeSearchIsSpare(value:boolean){
+    this.isSpare = value;
+    var req : searchDTO ={
+      keyword : '',
+      isSpare : this.isSpare
+     };
+  
+     this.http.post<any>(this.url+"api/"+'product/Search', req).subscribe(result => {  
+      this.products = result;
+        this.list = this.products;
+        this.refreshProductList();
+    }, error => console.error( JSON.stringify(error)));
+
+   
+  }
+
+  refreshProductList(){
+   //alert(JSON.stringify(this.batchProducts));
+    this.batchProducts.forEach((value:{productId: number}) =>{
+    var index =   this.products.findIndex((product: any)=>product.id == value.productId);
+   //  alert("product index = "+ index);
+    if(index >= 0){
+      this.products.splice(index,1);
+    }
+    });
+  }
 
   selectProductEvent(item:any){
     //alert(JSON.stringify(item));
@@ -131,6 +177,11 @@ this.url="https://localhost:7064/";
   }
 
 
+  addPrice(event: any){
+    this.newBatchProduct.price = event.target.value;
+  }
+
+
 
 
   addCount(event: any){
@@ -146,10 +197,9 @@ this.url="https://localhost:7064/";
     this.newBatchProduct.productNameAR = this.newBatchProduct.product.nameAR;
    this.batchProducts.push(this.newBatchProduct);
 
-
-
-   this.data.forEach((value: { id: number; },index: any)=>{
-    if(value.id==this.newBatchProduct.productId) this.data.splice(index,1);});
+   this.SelectedProductId = -1;
+   this.refreshProductList();
+   this.CaluclateTotal(); 
 
 this.newBatchProduct = new productBuffer ;
 
@@ -166,23 +216,35 @@ ReomveProductFromSearch(){
 
   deleteProduct(id:number){
     
-    this .http.get<any>(this.url+ "api/"+"product").subscribe(result => {
-      this.products=  result;
-      const index = this.products.findIndex((x:any) => x.id === id);
+    var req : searchDTO ={
+      keyword : '',
+      isSpare : this.isSpare
+     };
+  
+     this.http.post<any>(this.url+"api/"+'product/Search', req).subscribe(result => {  
+      this.products = result;
+        this.list = this.products;
+        this.batchProducts.forEach((value:any,index: any)=>{
+          if(value.productId==id) this.batchProducts.splice(index,1);
+      });
+      
+        this.refreshProductList();
+        this.CaluclateTotal(); 
+    }, error => console.error( JSON.stringify(error)));
+    // this .http.get<any>(this.url+ "api/"+"product").subscribe(result => {
+    //   this.products=  result;
+    //   const index = this.products.findIndex((x:any) => x.id === id);
 
-      console.log(this.products[index]);
-      this.data.push(this.products[index]);
-     
-      this.batchProducts.forEach((value:any,index: any)=>{
-        if(value.productId==id) this.batchProducts.splice(index,1);
-    });
+    //   console.log(this.products[index]);
+    
 
-    }, error => console.error(error));
+    // this.refreshProductList();
+
+    // }, error => console.error(error));
    
 
   
 
-  
 
   // var findList = this.list.find((x: { id: number; name:string;}) => x.id === id);
   // alert("find List length = "+ findList.length);
@@ -198,6 +260,7 @@ ReomveProductFromSearch(){
     console.log(newBatch);
    
 
+    this.CaluclateTotal(); 
       var batch = new Batch;
       if(newBatch.controls.bookNo.value){
       batch.bookNo = newBatch.controls.bookNo.value;
@@ -265,6 +328,7 @@ class productBuffer{
   batchId!:number;
   productId!:number;
   count: number = 1;
+  price: number = 0;
   btachType!:number;
   operationDate!:any;
 productName!:string;
@@ -275,6 +339,7 @@ class BatchProduct{
   batchId!:number;
   productId!:number;
   count: number = 1;
+  price: number = 0;
   btachType!:number;
   operationDate!:any;
 
@@ -292,4 +357,11 @@ class Batch{
   productCount!:number
 
   BatchProducts: BatchProduct[] = [];
+}
+
+
+class searchDTO {
+
+  keyword?: string;
+  isSpare?: boolean;
 }

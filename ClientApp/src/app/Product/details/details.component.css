@@ -11,3 +11,13 @@ a{
     background: white;
     box-shadow: 0 0 20px 0px black;
 }
+.Batch-Header-details{
+    margin-top: 20px;
+}
+img{
+    height: 300px;
+width: 100%;
+object-fit: contain;
+border-radius: 10px;
+box-shadow: 0 0 11px 0px black;
+}

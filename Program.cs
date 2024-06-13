@@ -24,10 +24,10 @@ builder.Services.AddIdentityCore<User>(options => options.Password.RequireNonAlp
     .AddEntityFrameworkStores<DBContext>().AddDefaultTokenProviders(); ;
 
 
-builder.Services.AddDbContext<DBContext>(options =>
-{
-    options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
-});
+    builder.Services.AddDbContext<DBContext>(options =>
+    {
+        options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
+    });
 
 //var appSettingsSection = builder.Configuration.GetSection("AppSettings");
 //builder.Services.Configure<SettingsHelper>(appSettingsSection);
@@ -139,6 +139,6 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller}/{action=Index}/{id?}");
 
-app.MapFallbackToFile("index.html");
+app.MapFallbackToFile("index.html");    
 
 app.Run();

@@ -17,8 +17,10 @@
         public DateTime CreatedDate { get; set; }
         public bool IsDeleted { get; set; }
         public bool IsSpare { get; set; }
-        public int? SpareForProductId { get; set; }
-        public Product? SpareForProduct { get; set; }
+        public string SpareForProducts { get; set; }
+        public decimal Cost { get; set; }
+
+        public decimal Price { get; set; }
         public int brandId { get; set; }
         public int CategoryId { get; set; }
         public int TypeId { get; set; }

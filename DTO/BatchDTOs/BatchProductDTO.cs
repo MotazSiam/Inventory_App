@@ -10,6 +10,7 @@ namespace Inventory_App.DTO.BatchDTOs
         public string ProductDescription { get; set; }
         public int batchId { get; set; }
         public int productId { get; set; }
+        public string? supplierName { get; set; }
 
         public int count { get; set; }
         public decimal price { get; set; }
@@ -34,6 +35,7 @@ namespace Inventory_App.DTO.BatchDTOs
                 batchId = entity.BatchId,
                 year = entity.Year,
                 month = entity.Month,
+                supplierName = entity.Batch == null ? null : entity.Batch.SupplierName,
             };
         }
 

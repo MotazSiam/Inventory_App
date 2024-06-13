@@ -177,6 +177,9 @@ namespace Inventory_App.Migrations
                     b.Property<string>("Code")
                         .HasColumnType("longtext");
 
+                    b.Property<decimal>("Cost")
+                        .HasColumnType("decimal(65,30)");
+
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime(6)");
 
@@ -209,11 +212,15 @@ namespace Inventory_App.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(65,30)");
+
                     b.Property<string>("Size")
                         .HasColumnType("longtext");
 
-                    b.Property<int?>("SpareForProductId")
-                        .HasColumnType("int");
+                    b.Property<string>("SpareForProducts")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.Property<int>("StartStock")
                         .HasColumnType("int");
@@ -230,8 +237,6 @@ namespace Inventory_App.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
-
-                    b.HasIndex("SpareForProductId");
 
                     b.HasIndex("TypeId");
 
@@ -494,10 +499,6 @@ namespace Inventory_App.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Inventory_App.Entities.Product", "SpareForProduct")
-                        .WithMany()
-                        .HasForeignKey("SpareForProductId");
-
                     b.HasOne("Inventory_App.Entities.Type", "Type")
                         .WithMany()
                         .HasForeignKey("TypeId")
@@ -513,8 +514,6 @@ namespace Inventory_App.Migrations
                     b.Navigation("Brand");
 
                     b.Navigation("Category");
-
-                    b.Navigation("SpareForProduct");
 
                     b.Navigation("Type");
                 });

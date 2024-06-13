@@ -31,7 +31,7 @@ export class AuthInterceptor implements HttpInterceptor {
     return next.handle(request).pipe( tap(() => {},
       (err: any) => {
       if (err instanceof HttpErrorResponse) {
-        if (err.status !== 401) {
+        if (err.status == 500) {
           
   
         (<HTMLInputElement>document.getElementById("error")).hidden = false;
@@ -40,9 +40,21 @@ export class AuthInterceptor implements HttpInterceptor {
         setTimeout(function() {
           (<HTMLInputElement>document.getElementById("error")).hidden = true;
           
-      }.bind(this), 3000);
+      }.bind(this), 6000);
          return;
         }
+        if (err.status == 400) {
+          
+  
+          (<HTMLInputElement>document.getElementById("error")).hidden = false;
+            (<HTMLInputElement>document.getElementById("error")).textContent = JSON.stringify(err.error.title);
+          
+          setTimeout(function() {
+            (<HTMLInputElement>document.getElementById("error")).hidden = true;
+            
+        }.bind(this), 6000);
+           return;
+          }
         this.auth.logout();
         this.router.navigate(['SignIn']);
         window.location.reload();

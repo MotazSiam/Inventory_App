@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 })
 export class BatchCreateComponent implements OnInit {
 
+  public isSpare: boolean = false;
   data:any;
   list:any;
   products:any;
@@ -54,12 +55,45 @@ this.url="https://localhost:7064/";
   }
 
 
+  changeSearchIsSpare(value:boolean){
+    this.isSpare = value;
+    var req : searchDTO ={
+      keyword : '',
+      isSpare : this.isSpare
+     };
+  
+  
+     this.http.post<any>(this.url+"api/"+'product/Search', req).subscribe(result => {  
+      this.products = result;
+        this.list = this.products;
+        this.refreshProductList();
+    }, error => console.error( JSON.stringify(error)));
+
+   
+  }
+
+  SearchProduct(event: any) {
+    var req: searchDTO = {
+      keyword: event.target.value,
+      isSpare: this.isSpare
+    };
+
+
+    this.http.post<any>(this.url + "api/" + 'product/Search', req).subscribe(result => {
+      this.products = result;
+      this.list = this.products;
+      this.refreshProductList();
+    }, error => console.error(JSON.stringify(error)));
+
+
+
+  }
 
   selectProductEvent(item:any){
-    alert(JSON.stringify(item));
+  
     this.SelectedProductId = item.id;
     this.newBatchProduct.productId = item.id;
-    alert( this.SelectedProductId );
+   
   }
   closeSelectedProduct(){
     this.newBatchProduct = new BatchProduct;
@@ -76,6 +110,11 @@ this.url="https://localhost:7064/";
   }
 
 
+  
+  addPrice(event: any){
+    this.newBatchProduct.price = event.target.value;
+  }
+
 
 
   addCount(event: any){
@@ -88,15 +127,26 @@ this.url="https://localhost:7064/";
     this.newBatchProduct.product = this.list.find((i: { id: number; }) => i.id === this.newBatchProduct.productId);
    this.batchProducts.push(this.newBatchProduct);
 
+   this.refreshProductList();
 
    this.data.forEach((value: { id: number; },index: any)=>{
     if(value.id==this.newBatchProduct.productId) this.data.splice(index,1);
 });
 
 this.newBatchProduct = new BatchProduct ;
-
+this.SelectedProductId = -1;
 }
 
+
+refreshProductList(){
+  this.batchProducts.forEach((value:{productId: number}) =>{
+  var index =   this.products.findIndex((product: any)=>product.id == value.productId);
+  // alert("product index = "+ index);
+  if(index > 0){
+    this.products.splice(index,1);
+  }
+  });
+}
 
 // CaluclateTotal(){
 //   this.totalAmount = 0;
@@ -185,6 +235,7 @@ class BatchProduct{
   batchId!:number;
   productId!:number;
   count: number = 1;
+  price: number = 0;
   btachType!:number;
   operationDate!:any;
 
@@ -202,4 +253,10 @@ class Batch{
  
 
   BatchProducts: BatchProduct[] = [];
+}
+
+class searchDTO {
+
+  keyword?: string;
+  isSpare?: boolean;
 }

@@ -10,6 +10,8 @@ import { Router } from '@angular/router';
 })
 export class ProductCreateComponent implements OnInit {
 
+
+  public img = "https://localhost:7064/uploads/products/images2023-48-33.png";
 public product: Product ={
   name: '',
   nameAR: '',
@@ -19,7 +21,8 @@ public product: Product ={
   code: '',
   electricity: '',
   engine: '',
-  startStock: 0
+  startStock: 0,
+  isSpare: false
 };
 url:any;
 public list: Product[] = [];
@@ -28,6 +31,7 @@ public cats : any;
 public types:any;
 public TypesByCat:any;
 search:String ="";
+  base64Image: string | undefined;
   constructor(public http: HttpClient,  @Inject('BASE_URL') baseUrl: string ,private router: Router )   {   this.url =baseUrl;
 this.url="https://localhost:7064/";
 }
@@ -46,6 +50,33 @@ this.url="https://localhost:7064/";
       }, error => console.error(error));
   }
 
+  handleUpload(event: any) {
+    const file = event.target.files[0];
+
+    alert(JSON.stringify(file.type));
+    const reader = new FileReader();
+    reader.readAsDataURL(file); 
+    reader.onload = () => {
+        this.base64Image = reader.result?.toString();
+
+        var request : ImgRequest ={
+          img : this.base64Image,
+          fileType : file.type
+        };
+    
+        this.http.post<any>(this.url+"api/"+'product/UploadImg', request).subscribe(result => {
+          
+          this.product.img = result.imgUrl;
+        }, error => console.error( JSON.stringify(error)));
+ 
+
+    };
+
+   
+  } 
+
+
+ 
   changeBrand(event:any){
    console.log( event.target);
    // alert( event.target.value);
@@ -60,7 +91,9 @@ this.url="https://localhost:7064/";
    AddProduct(newProduct : any)
   {
 
-this.product.brandId = newProduct.controls.brand.value;
+
+
+    this.product.brandId = newProduct.controls.brand.value;
     this.product.name =   newProduct.controls.name.value;
     this.product.nameAR = newProduct.controls.nameAR.value;
     this.product.model =   newProduct.controls.model.value;
@@ -76,9 +109,21 @@ this.product.brandId = newProduct.controls.brand.value;
     this.product.categoryId = newProduct.controls.category.value;
     this.product.typeId = newProduct.controls.type.value;
 
+
+    this.product.unit = newProduct.controls.unit.value;
+    if(newProduct.controls.isSpare.value == 1){
+      this.product.isSpare = true;
+    }
+  
+    this.product.cost = newProduct.controls.cost.value;
+    this.product.price = newProduct.controls.price.value;
+    this.product.spareForProducts = newProduct.controls.spareForProducts.value;
+
+
     //alert("category value  = "+ newProduct.controls.category.value +";");
 
 
+    console.log(this.product);
 
 
     this.http.post<any>(this.url+ "api/"+'product', this.product).subscribe(result => {
@@ -102,10 +147,15 @@ class Product {
   electricity: string ="";
   engine : string ="";
   startStock : number =0;
+  img?: string;
+  isSpare:boolean = false;
+  cost?:number;
+  price? : number;
+  unit?: string;
+  spareForProducts?:string;
   brandId?: number;
   categoryId?: number;
   typeId?: number;
- 
 }
 
 interface Brand {
@@ -116,4 +166,9 @@ interface Brand {
   isDeleted: boolean;
   createdDate: any;
   
+}
+
+interface ImgRequest{
+  img?:string;
+  fileType ?: string;
 }

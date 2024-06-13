@@ -19,6 +19,9 @@ namespace Inventory_App.DTO.ProductDTOs
 
               public string img { get; set; } = "";
         public string unit { get; set; } = "piece";
+        public string spareForProducts { get; set; } = "";
+        public decimal cost { get; set; } = 0;
+        public decimal price { get; set; } = 0;
 
         public bool isSpare { get; set; } = false;
         public int? spareForProductId { get; set; }
@@ -48,7 +51,10 @@ namespace Inventory_App.DTO.ProductDTOs
                 IsDeleted = false,
                 CreatedDate = createDate,
                 IsSpare = isSpare,
-                SpareForProductId = spareForProductId == null ? null : spareForProductId.Value,
+                SpareForProducts = spareForProducts,
+                Cost = cost,
+                Price = price,
+                
                 
 
             };
