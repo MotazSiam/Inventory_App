@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-brand-list',
   templateUrl: './brand-list.component.html',
@@ -13,8 +14,7 @@ export class BrandListComponent implements OnInit {
   public sortName!:Boolean;
   url:any;
   constructor( public http: HttpClient , private router: Router  , @Inject('BASE_URL') baseUrl: string) {
-    this.url =baseUrl;
-this.url="https://localhost:7064/";
+this.url=environment.API_URL;
 
     this.sortName= false;
    }

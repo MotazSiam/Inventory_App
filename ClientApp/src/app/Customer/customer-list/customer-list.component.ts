@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, Inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-customer-list',
@@ -20,8 +21,8 @@ export class CustomerListComponent implements OnInit {
 
   constructor( public http: HttpClient , private router: Router  , @Inject('BASE_URL') baseUrl: string) 
   {
-    this.url =baseUrl;
-    this.url="https://localhost:7064/";
+    
+    this.url=environment.API_URL;
     this.sortName= false;
    }
 

@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, Inject, OnInit } from '@angular/core';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-bill-list',
@@ -18,9 +19,9 @@ export class BillListComponent implements OnInit {
   batchDetial: any;
   btachProductTotalCount: number = 0;
   batchProductsTotalAmount: number=0;
-  constructor( public http: HttpClient , @Inject('BASE_URL') baseUrl: string ) { 
-    this.url =baseUrl;
-this.url="https://localhost:7064/";
+  constructor( public http: HttpClient ) { 
+    
+this.url=environment.API_URL;
 
   }
   ngOnInit(): void {

@@ -25,8 +25,8 @@ public selectedCat:any;
 public selectedType:any;
 public selectedBrand: any;
 
-  constructor(public http: HttpClient , private router: Router,  @Inject('BASE_URL') baseUrl: string) {   this.url =baseUrl;
-this.url="https://localhost:7064/";
+  constructor(public http: HttpClient , private router: Router,  @Inject('BASE_URL') baseUrl: string) {   
+this.url=environment.API_URL;
 
 this.productId = Number(this.route.snapshot.params['id']);
     

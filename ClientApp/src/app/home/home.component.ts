@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 
 import { IgxLegendComponent, IgxCategoryChartComponent } from 'igniteui-angular-charts';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-home',
@@ -23,8 +24,8 @@ export class HomeComponent implements OnInit {
 
   productIdChart!: number;
   url:any;
-  constructor(public http: HttpClient,@Inject('BASE_URL') baseUrl: string) {this.url =baseUrl;
-    this.url="https://localhost:7064/";
+  constructor(public http: HttpClient,@Inject('BASE_URL') baseUrl: string) {
+    this.url=environment.API_URL;
 
    }
 

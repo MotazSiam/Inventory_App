@@ -2,6 +2,7 @@ import { Component, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Data } from '@angular/router';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-fetch-data',
@@ -12,8 +13,8 @@ export class FetchDataComponent {
   public forecasts: WeatherForecast[] = [];
   public brands: Brand[] = [];
   constructor(private http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
-    this.url =baseUrl;
-this.url="https://localhost:7064/";
+    
+this.url=environment.API_URL;
 
 
     this.getBrand().subscribe(response => {

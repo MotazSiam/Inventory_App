@@ -2,6 +2,7 @@ import { formatDate } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, Inject, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-batch-update',
@@ -29,8 +30,8 @@ export class BatchUpdateComponent implements OnInit {
   totalAmount:number =0;
 
   keyword:string ="name";
-  constructor(public http: HttpClient ,  private router: Router ,  @Inject('BASE_URL') baseUrl: string) {   this.url =baseUrl;
-this.url="https://localhost:7064/";
+  constructor(public http: HttpClient ,  private router: Router ,  @Inject('BASE_URL') baseUrl: string) {   
+this.url=environment.API_URL;
 
 }
 

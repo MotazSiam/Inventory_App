@@ -1,13 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   url:any;
-  constructor(public http: HttpClient ,  @Inject('BASE_URL') baseUrl: string) {    this.url =baseUrl;
-this.url="https://localhost:7064/";
+  constructor(public http: HttpClient ,  @Inject('BASE_URL') baseUrl: string) {    
+this.url=environment.API_URL;
 }
 
   public getToken(): string | null {

@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, Inject, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-bill-details',
@@ -12,8 +13,8 @@ export class BillDetailsComponent implements OnInit {
   bill:any;
   route: ActivatedRoute = inject(ActivatedRoute);
   bill_Id? : number;
-  constructor(public http: HttpClient, @Inject('BASE_URL') baseUrl: string ,private router: Router ) {  this.url =baseUrl;
-    this.url="https://localhost:7064/";
+  constructor(public http: HttpClient, @Inject('BASE_URL') baseUrl: string ,private router: Router ) {  
+    this.url=environment.API_URL;
      }
   ngOnInit(): void {
     this.bill_Id = Number(this.route.snapshot.params['id']);

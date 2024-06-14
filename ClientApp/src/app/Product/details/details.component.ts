@@ -5,6 +5,7 @@ import domToImage from 'dom-to-image';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 import * as moment from 'moment';
+import { environment } from 'src/environments/environment';
 //import moment from 'moment';
 
 
@@ -27,8 +28,8 @@ datePicker: any;
   pdfName: any;
   print: boolean = false;
   
-  constructor( public http: HttpClient , @Inject('BASE_URL') baseUrl: string , private router: Router ) {   this.url =baseUrl;
-this.url="https://localhost:7064/";
+  constructor( public http: HttpClient , @Inject('BASE_URL') baseUrl: string , private router: Router ) {   
+this.url=environment.API_URL;
 }
 
   ngOnInit(): void {

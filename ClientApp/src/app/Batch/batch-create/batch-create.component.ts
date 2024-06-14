@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, Inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 
 @Component({
@@ -24,8 +25,8 @@ export class BatchCreateComponent implements OnInit {
   totalAmount:number =0;
 
   keyword:string ="name";
-  constructor(public http: HttpClient, @Inject('BASE_URL') baseUrl: string ,private router: Router ) {  this.url =baseUrl;
-this.url="https://localhost:7064/";
+  constructor(public http: HttpClient, @Inject('BASE_URL') baseUrl: string ,private router: Router ) {  
+this.url=environment.API_URL;
  }
 
   ngOnInit(): void {

@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, Inject, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgModule } from "@angular/core";
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-type-update',
@@ -15,8 +16,8 @@ export class TypeUpdateComponent implements OnInit {
   type:any;
   selectedCat : any;
   url:any;
-  constructor(public http: HttpClient , private router: Router , @Inject('BASE_URL') baseUrl: string ) {  this.url =baseUrl;
-this.url="https://localhost:7064/";
+  constructor(public http: HttpClient , private router: Router , @Inject('BASE_URL') baseUrl: string ) {  
+this.url=environment.API_URL;
 
 this.typeId = Number(this.route.snapshot.params['id']);
 

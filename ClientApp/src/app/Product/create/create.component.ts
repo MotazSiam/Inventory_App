@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, Inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 
 @Component({
@@ -11,7 +12,7 @@ import { Router } from '@angular/router';
 export class ProductCreateComponent implements OnInit {
 
 
-  public img = "https://localhost:7064/uploads/products/images2023-48-33.png";
+  public img = environment.API_URL +"uploads/products/images2023-48-33.png";
 public product: Product ={
   name: '',
   nameAR: '',
@@ -32,8 +33,8 @@ public types:any;
 public TypesByCat:any;
 search:String ="";
   base64Image: string | undefined;
-  constructor(public http: HttpClient,  @Inject('BASE_URL') baseUrl: string ,private router: Router )   {   this.url =baseUrl;
-this.url="https://localhost:7064/";
+  constructor(public http: HttpClient,  @Inject('BASE_URL') baseUrl: string ,private router: Router )   {   
+this.url=environment.API_URL;
 }
 
   ngOnInit(): void {

@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, Inject, OnInit } from '@angular/core';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-batch-list',
@@ -19,8 +20,8 @@ export class BatchListComponent implements OnInit {
   btachProductTotalCount: number = 0;
   batchProductsTotalAmount: number=0;
   constructor( public http: HttpClient , @Inject('BASE_URL') baseUrl: string ) { 
-    this.url =baseUrl;
-this.url="https://localhost:7064/";
+    
+this.url=environment.API_URL;
 
   }
 
